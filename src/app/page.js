@@ -1,101 +1,70 @@
+// Home Page
+
+"use client";
+import Header from "./components/Header";
+import { useProduct } from "./ContextProvider";
+import Tiles from "./components/Tiles";
+import Banner from "./components/Banner";
+import Footer from "./components/Footer";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const products = useProduct();
+  console.log("Products: ",products[0].images)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // using the first 4 products as banners for now
+  const bannerProducts = products.slice( 0 , 4 )
+  const [ currentBanner , setCurrentBanner ] = useState(0);
+
+  useEffect(() => {
+    // Set an interval to change the banner every 2 seconds
+    const intervalId = setInterval(() => {
+      // Update the currentBanner state to cycle through bannerProducts
+      setCurrentBanner(prevBanner => (prevBanner + 1) % bannerProducts.length);
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [bannerProducts.length]);
+
+  return ( 
+    <div id="Home">
+      <Header currentPage={'home'} />
+      <div className="bg-white dark:bg-black">
+        <Banner product={bannerProducts[currentBanner]} />
+      </div>
+        
+      <div className="p-5 mx-auto max-w-screen-xl">
+        <h2 className="font-bold uppercase text-xl pb-4">Best sellers</h2>
+        
+        <div className="grid grid-flow-row-dense grid-cols-2 gap-3 justify-between sm:grid-cols-3 md:grid-cols-4">
+
+          {/* Map the product array and pass to Tile */}
+          {
+            products.map(product =>{
+              return( <Tiles key={product.id} product={product} /> )
+            })
+          }
+        
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      <div className="bg-gray-500 text-white dark:bg-gray-800">
+        <section className="py-5 mx-auto max-w-screen-xl  sm:flex flex-grow-0 sm:p-5">
+          <article className="flex-col justify-center inline-flex self-stretch  p-6">
+            <h2 className="uppercase font-semibold text-xl">Design</h2>
+            <strong className="text-lg pb-2 font-normal font-sans sm:text-2xl">Our 30 Year Journey</strong>
+            <p className="text-sm pb-4">Join us as we revisit our roots, tracing the path from bright idea to industry disruptors with a plan to fight climate change while creating beautiful things. </p>
+            <button className="font-semibold uppercase rounded-md border-white border p-3 max-w-max hover:bg-gray-600 hover:text-white">Join us</button>
+          </article>
+          <figure>
+            <Image 
+            src="https://images.unsplash.com/photo-1606170033648-5d55a3edf314?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGxpZ2h0c3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" 
+            alt="Banner" looding="lazy" width={1080} height={520} />
+          </figure>
+        </section>
+      </div>
+      <Footer />
     </div>
   );
 }
