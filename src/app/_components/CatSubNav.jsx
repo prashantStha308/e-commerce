@@ -1,5 +1,6 @@
 // Sub navbar for @/Linkpp/category/page.jsx
 
+"use client"
 import Link from 'next/link'
 import React from 'react'
 
@@ -19,7 +20,7 @@ const CatSubNav = ( {currentPage} ) => {
             </li>
 
             <li>
-                <Link href="/category/art_craft" className={`block py-2 px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'art' ? "text-blue-700 md:dark:text-blue-500" : ""  }`}> Art and Craft </Link>
+                <Link href="/category/art" className={`block py-2 px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'art' ? "text-blue-700 md:dark:text-blue-500" : ""  }`}> Art and Craft </Link>
             </li>
 
             <li>

@@ -1,17 +1,16 @@
 // Home Page
 
 "use client";
-import Header from "./components/Header";
-import { useProduct } from "./ContextProvider";
-import Tiles from "./components/Tiles";
-import Banner from "./components/Banner";
-import Footer from "./components/Footer";
+import Header from "./_components/Header";
+import { useProduct } from "./_store/ContextProvider";
+import Tiles from "./_components/Tiles";
+import Banner from "./_components/Banner";
+import Footer from "./_components/Footer";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Home() {
   const products = useProduct();
-  console.log("Products: ",products[0].images)
 
   // using the first 4 products as banners for now
   const bannerProducts = products.slice( 0 , 4 )

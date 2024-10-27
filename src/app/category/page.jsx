@@ -1,14 +1,13 @@
 "use client";
-import Header from "../components/Header"
-import CatSubNav from "../components/CatSubNav";
-import Footer from "../components/Footer";
+import Header from "../_components/Header"
+import CatSubNav from "../_components/CatSubNav";
+import Footer from "../_components/Footer";
 import Beauty from "./beauty/Beauty";
-import Art from "./art_craft/Art";
+import Art from "./art/Art";
 import Others from "./others/Others";
 
 
 export default function CategoryAll() {
-
 
   return (
     <section id="category">

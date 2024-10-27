@@ -1,6 +1,6 @@
 import React from 'react'
-import Tiles from '@/app/components/Tiles'
-import { useProduct } from '@/app/ContextProvider';
+import Tiles from '@/app/_components/Tiles'
+import { useProduct } from '@/app/_store/ContextProvider';
 
 const Art = () => {
 

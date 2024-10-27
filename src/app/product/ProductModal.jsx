@@ -2,8 +2,8 @@
  
 import { StarIcon } from '@heroicons/react/20/solid'
 import { HeartIcon, MinusIcon, PlusIcon , ArrowLeftCircleIcon } from '@heroicons/react/24/outline'
-import Header from './Header';
-import Footer from './Footer'
+import Header from '@/app/_components/Header';
+import Footer from '@/app/_components/Footer'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 
 

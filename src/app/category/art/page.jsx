@@ -1,9 +1,9 @@
 "use client";
 
 import React from 'react'
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
-import CatSubNav from '@/app/components/CatSubNav';
+import Header from '@/app/_components/Header';
+import Footer from '@/app/_components/Footer';
+import CatSubNav from '@/app/_components/CatSubNav';
 import Art from './Art';
 
 const CategoryArt = () => {
