@@ -4,8 +4,11 @@ import React from 'react'
 import { HeartIcon } from '@heroicons/react/20/solid'
 import { useProductAtCheckout } from '../_store/store'
 import Link from 'next/link'
+import { useProduct } from '../_store/ContextProvider'
 
 const AddToCart = ({ id }) => {
+
+    const allProducts = useProduct();
     const { addProduct } = useProductAtCheckout();
   return (
 
@@ -13,7 +16,7 @@ const AddToCart = ({ id }) => {
         <button
             type="button"
             className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
-           onClick={()=>addProduct(id)}
+           onClick={()=>addProduct(id , allProducts)}
         >
             Add to bag
         </button>

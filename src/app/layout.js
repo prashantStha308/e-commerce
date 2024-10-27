@@ -17,6 +17,7 @@ const productArr = [
     rating: 4.94,
     stock: 0,
     brand: "Essence",
+    userQuantity: 0,
     images: [
       "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png"
     ],
@@ -31,6 +32,7 @@ const productArr = [
     rating: 3.28,
     stock: 44,
     brand: "Glamour Beauty",
+    userQuantity: 0,
     images: [
       "https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/1.png"
     ],
@@ -45,6 +47,7 @@ const productArr = [
     rating: 3.82,
     stock: 59,
     brand: "Velvet Touch",
+    userQuantity: 0,
     images: [
       "https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/1.png"
     ],
@@ -59,6 +62,7 @@ const productArr = [
     rating: 2.51,
     stock: 68,
     brand: "Chic Cosmetics",
+    userQuantity: 0,
     images: [
       "https://cdn.dummyjson.com/products/images/beauty/Red%20Lipstick/1.png"
     ],
@@ -73,6 +77,7 @@ const productArr = [
     rating: 3.91,
     stock: 71,
     brand: "Nail Couture",
+    userQuantity: 0,
     images: [
       "https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/1.png"
     ],
@@ -87,6 +92,7 @@ const productArr = [
     rating: 4.85,
     stock: 17,
     brand: "Calvin Klein",
+    userQuantity: 0,
     images: [
       "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/1.png"
     ],

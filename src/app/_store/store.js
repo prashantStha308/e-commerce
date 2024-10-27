@@ -1,35 +1,40 @@
 "use client";
 
 import { create } from "zustand";
-import { useProduct } from "./ContextProvider";
 
 // Define the Zustand store
+// The alteration in the objects only take effect in the product[] array.
+
+
 const useProductStore = create((set, get) => ({
   product: [],
 
   // Function to add products to the cart
-  addProduct: (id) => {
+  addProduct: (id, allProducts) => {
     const { product } = get();
-    const allProducts = useProduct(); // Get products directly here
 
-    const neededProduct = allProducts.find((item) => item.id == id);
+    const target = allProducts.find((item) => item.id == id);
 
-    if (!neededProduct) {
+    if (!target) {
       return;
     }
 
-    // If product already exists, increase the quantity.
-    if (product.find((item) => item.id === neededProduct.id)) {
+    // If product already exists, increase the userQuantity.
+    if (product.find((item) => item.id === target.id)) {
       set((state) => ({
         product: state.product.map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === id ? { ...item, userQuantity: item.userQuantity + 1 } : item
         ),
       }));
     } else {
+      // Set initial userQuantity to 1 when adding a new product
       set((state) => ({
-        product: [...state.product, { ...neededProduct, quantity: 1 }],
+        product: [...state.product, { ...target, userQuantity: 1 }],
       }));
+      
     }
+
+    console.log("Target:", product[ product.length - 1 ]);
   },
 
   // Function to remove a product from cart
@@ -42,14 +47,14 @@ const useProductStore = create((set, get) => ({
       return;
     }
 
-    if (target.quantity === 1) {
+    if (target.userQuantity === 1) {
       set((state) => ({
         product: state.product.filter((item) => item.id != target.id),
       }));
     } else {
       set((state) => ({
         product: state.product.map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === id ? { ...item, userQuantity: item.userQuantity - 1 } : item
         ),
       }));
     }
