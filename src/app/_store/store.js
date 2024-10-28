@@ -2,6 +2,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+// persist middleware stores the data in the localStorage
+
 const useProductStore = create(
   persist(
     (set, get) => ({

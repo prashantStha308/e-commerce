@@ -452,7 +452,7 @@ const Checkout = () => {
 
                         <dl className="flex items-center justify-between gap-4 py-3">
                         <dt className="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                        <dd className="text-base font-bold text-gray-900 dark:text-white">$ {product ? completeTotal(product.id)  ?? 0 : 0} </dd>
+                        <dd className="text-base font-bold text-gray-900 dark:text-white">$ {product ? Math.round(  completeTotal(product.id) * 100 ) / 100  ?? 0 : 0} </dd>
                         </dl>
                     </div>
                     </div>
