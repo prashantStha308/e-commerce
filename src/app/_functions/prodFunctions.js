@@ -1,4 +1,3 @@
-
 function swap(arr, i, j) {
     let temp = arr[i];
     arr[i] = arr[j];
@@ -30,13 +29,3 @@ export const sort = (arr, low = 0, high = arr.length - 1) => {
     }
     return arr; // Return the sorted array
 };
-
-export const updateCount = ( count ,  inr )=>{
-
-    count += inr;
-
-    if( count < 0 ){
-        return 0;
-    }
-    return count;
-}

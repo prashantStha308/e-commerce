@@ -16,9 +16,6 @@ const AddToCart = ({ id }) => {
     const [ addToBag , setAddToBag ] = useState("Add To Cart");
     const targetProduct = product.find( item =>( item.id == id ) );
 
-    console.log("Target: ",targetProduct)
-    console.log( "productInBag: ", product )
-
     const intervalId = useRef(null);
   
     // Increment the count
@@ -58,13 +55,15 @@ const AddToCart = ({ id }) => {
         };
     }, []);
 
+    console.log( "Products: ",product )
+
 
     return (
         <>
             <div className="flex items-center gap-4">
                 <button
                 type='button'
-                    className="rounded-sm bg-indigo-600 hover:bg-indigo-800 transition-all"
+                    className="rounded-sm bg-indigo-600 text-white hover:bg-indigo-800 transition-all"
                     onClick={()=>{
                     handleCountDcr();
                     count === 0 && removeProduct( id );
@@ -73,11 +72,11 @@ const AddToCart = ({ id }) => {
                     <MinusIcon width={40} height={40} />
                 </button>
 
-                <span className="border border-white py-2 px-3"> {count} </span>
+                <span className="border border-black dark:border-white py-2 px-3"> {count} </span>
 
                 <button
                 type='button'
-                    className="rounded-sm bg-indigo-600 hover:bg-indigo-800 transition-all"
+                    className="rounded-sm bg-indigo-600 text-white hover:bg-indigo-800 transition-all"
                     onClick={handleCountInr} 
                 >
                     <PlusIcon width={40} height={40} />

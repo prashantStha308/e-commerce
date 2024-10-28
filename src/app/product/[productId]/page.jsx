@@ -3,6 +3,7 @@ import Header from '@/app/_components/Header';
 import Footer from '@/app/_components/Footer';
 import { products } from '@/app/layout';
 import AddToCart from '@/app/_components/AddToCart';
+import { notFound } from 'next/navigation';
 
 
 
@@ -13,6 +14,10 @@ export default async function ProductPage({ params }) {
     const product = products.find( item =>{
       return (item.id == productId)
     } );
+
+    if( !product ){
+      notFound(); // If Id not found, go to 404 error page
+    }
 
 
   return (

@@ -1,9 +1,14 @@
 "use client"
 
+import Bill from '@/app/_components/Bill'
 import Footer from '@/app/_components/Footer'
 import Header from '@/app/_components/Header'
+import { useProductAtCheckout } from '@/app/_store/store'
 
 const Checkout = () => {
+
+    const { product , completeTotal  } = useProductAtCheckout();
+    console.log( "Products: ", product )
 
 
   return (
@@ -75,7 +80,7 @@ const Checkout = () => {
                             <label htmlFor="select-city-input-3" className="block text-sm font-medium text-gray-900 dark:text-white"> City* </label>
                         </div>
                         <select id="select-city-input-3" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                            <option selected>San Francisco</option>
+                            <option defaultValue={true}>San Francisco</option>
                             <option value="NY">New York</option>
                             <option value="LA">Los Angeles</option>
                             <option value="CH">Chicago</option>
@@ -317,7 +322,7 @@ const Checkout = () => {
                         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800">
                         <div className="flex items-start">
                             <div className="flex h-5 items-center">
-                            <input id="credit-card" aria-describedby="credit-card-text" type="radio" name="payment-method" value="" className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" checked />
+                            <input id="credit-card" aria-describedby="credit-card-text" type="radio" name="payment-method" value="" className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" defaultChecked />
                             </div>
 
                             <div className="ms-4 text-sm">
@@ -386,7 +391,7 @@ const Checkout = () => {
                         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4 dark:border-gray-700 dark:bg-gray-800">
                         <div className="flex items-start">
                             <div className="flex h-5 items-center">
-                            <input id="dhl" aria-describedby="dhl-text" type="radio" name="delivery-method" value="" className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" checked />
+                            <input id="dhl" aria-describedby="dhl-text" type="radio" name="delivery-method" value="" className="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" defaultChecked />
                             </div>
 
                             <div className="ms-4 text-sm">
@@ -438,29 +443,16 @@ const Checkout = () => {
                 <div className="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
                     <div className="flow-root">
                     <div className="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
-                        <dl className="flex items-center justify-between gap-4 py-3">
-                        <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
-                        <dd className="text-base font-medium text-gray-900 dark:text-white">$8,094.00</dd>
-                        </dl>
 
-                        <dl className="flex items-center justify-between gap-4 py-3">
-                        <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>
-                        <dd className="text-base font-medium text-green-500">0</dd>
-                        </dl>
-
-                        <dl className="flex items-center justify-between gap-4 py-3">
-                        <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Store Pickup</dt>
-                        <dd className="text-base font-medium text-gray-900 dark:text-white">$99</dd>
-                        </dl>
-
-                        <dl className="flex items-center justify-between gap-4 py-3">
-                        <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
-                        <dd className="text-base font-medium text-gray-900 dark:text-white">$199</dd>
-                        </dl>
+                        {
+                            product ? product.map( item =>{
+                                return( <Bill key={item.id} product={item} /> )
+                            } ) ?? " " : " "
+                        }
 
                         <dl className="flex items-center justify-between gap-4 py-3">
                         <dt className="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                        <dd className="text-base font-bold text-gray-900 dark:text-white">$8,392.00</dd>
+                        <dd className="text-base font-bold text-gray-900 dark:text-white">$ {product ? completeTotal(product.id)  ?? 0 : 0} </dd>
                         </dl>
                     </div>
                     </div>
