@@ -2,7 +2,6 @@ import { StarIcon } from '@heroicons/react/20/solid';
 import Header from '@/app/_components/Header';
 import Footer from '@/app/_components/Footer';
 import { products } from '@/app/layout';
-import Counter from '@/app/_components/Counter';
 import AddToCart from '@/app/_components/AddToCart';
 
 
@@ -71,7 +70,7 @@ export default async function ProductPage({ params }) {
 
               <form className="mt-6">
 
-                <Counter id={product.id} />
+                {/* <Counter id={product.id} /> */}
 
                <AddToCart id={product.id} />
 

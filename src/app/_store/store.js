@@ -1,16 +1,13 @@
 "use client";
-
 import { create } from "zustand";
-
-// Define the Zustand store
-// The alteration in the objects only take effect in the product[] array.
 
 
 const useProductStore = create((set, get) => ({
   product: [],
 
   // Function to add products to the cart
-  addProduct: (id, allProducts) => {
+  addProduct: ( id , allProducts , count ) => {
+
     const { product } = get();
 
     const target = allProducts.find((item) => item.id == id);
@@ -19,26 +16,23 @@ const useProductStore = create((set, get) => ({
       return;
     }
 
-    // If product already exists, increase the userQuantity.
+    // If product already exists, just update the quamtity
     if (product.find((item) => item.id === target.id)) {
       set((state) => ({
         product: state.product.map((item) =>
-          item.id === id ? { ...item, userQuantity: item.userQuantity + 1 } : item
+          item.id === id ? { ...item, userQuantity: count } : item
         ),
       }));
+      // add a new product to product[] 
     } else {
-      // Set initial userQuantity to 1 when adding a new product
       set((state) => ({
-        product: [...state.product, { ...target, userQuantity: 1 }],
+        product: [...state.product, { ...target, userQuantity: count }],
       }));
-      
     }
-
-    console.log("Target:", product[ product.length - 1 ]);
   },
 
   // Function to remove a product from cart
-  removeProduct: (id) => {
+  removeProduct: ( id ) => {
     const { product } = get();
     const target = product.find((item) => item.id == id);
 
@@ -47,27 +41,33 @@ const useProductStore = create((set, get) => ({
       return;
     }
 
-    if (target.userQuantity === 1) {
+
+    // filter the target.id out from product[]
       set((state) => ({
         product: state.product.filter((item) => item.id != target.id),
       }));
-    } else {
-      set((state) => ({
-        product: state.product.map((item) =>
-          item.id === id ? { ...item, userQuantity: item.userQuantity - 1 } : item
-        ),
-      }));
-    }
+
   },
 
-  // Placeholder functions
-  countProduct: (id) => {
+
+  productTotal: (id) => {
+    const { product } = get();
+    const target = product.find( item=>( product.id === id ) )
+
+    const total = target.userQuantity * target.price;
+    
+    return total;
+
   },
 
-  countTotal: () => {
+  completeTotal: () => {
+    const { product } = get();
+    let sum = 0;
+    product.forEach( item =>( sum+= item.price * item.userQuantity ) )
 
+    return sum;
   },
 }));
 
-// Custom hook to access the store
+
 export const useProductAtCheckout = () => useProductStore();

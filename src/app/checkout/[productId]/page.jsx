@@ -1,13 +1,17 @@
+"use client"
+
 import Footer from '@/app/_components/Footer'
 import Header from '@/app/_components/Header'
-import React from 'react'
 
 const Checkout = () => {
+
+
   return (
     <>
         <Header />
         <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
-            <form action="#" className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+            <form action="#" className="mx-auto max-w-screen-xl px-4 2xl:px-0 ">
+
                 <ol className="items-center flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:text-base">
                 <li className="after:border-1 flex items-center text-primary-700 after:mx-6 after:hidden after:h-1 after:w-full after:border-b after:border-gray-200 dark:text-primary-500 dark:after:border-gray-700 sm:after:inline-block sm:after:content-[''] md:w-full xl:after:mx-10">
                     <span className="flex items-center after:mx-2 after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
@@ -36,7 +40,9 @@ const Checkout = () => {
                 </ol>
 
                 <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
-                <div className="min-w-0 flex-1 space-y-8">
+
+                    {/* User Details*/}
+                <div className="min-w-0 flex-1 space-y-8 ">
                     <div className="space-y-4">
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Delivery Details</h2>
 
@@ -426,6 +432,8 @@ const Checkout = () => {
                     </div>
                     </div>
                 </div>
+
+                {/* Items details */}
 
                 <div className="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
                     <div className="flow-root">

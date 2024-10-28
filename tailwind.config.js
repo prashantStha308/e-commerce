@@ -47,6 +47,20 @@ module.exports = {
         'Segoe UI Symbol', 
         'Noto Color Emoji'
       ]
+      },keyframes:{
+        modalAnim:{
+          from:{
+            bottom: "-10rem",
+            opcaity: "0"
+          },
+          to:{
+            bottom: "1rem",
+            opcaity: "1",
+          }
+        }
+      },
+      animation:{
+        "modalMove": "modalAnim 2s forward" ,
       }
     },
   },
