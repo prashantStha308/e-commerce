@@ -1,10 +1,24 @@
+import Head from "next/head";
 import { sort } from "./_functions/prodFunctions";
 import { PageContext, ProductContextProvider } from "./_store/ContextProvider";
 import "./globals.css";
 
 export const metadata = {
-  title: "NoveNest",
+  title: "NovaNest | Home",
   description: " An e-commerce website. First project using Next.js ",
+  openGraph: {
+    title: "NovaNest | Home",
+    description: "An e-commerce website. First project using Next.js",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png",
+    image: "public/ogLogo.png",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image", // Optional: Use if you want to customize Twitter Card
+    title: "NovaNest | Home",
+    description: "An e-commerce website. First project using Next.js",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png", // Twitter image URL
+  }
 };
 
 // Array of product objects
@@ -107,11 +121,8 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <head>
-        <title>NovaNest</title>
-      </head>
       <body>
-        <ProductContextProvider value={products} page={'/'}>
+        <ProductContextProvider value={products} >
           {children}
         </ProductContextProvider>
       </body>

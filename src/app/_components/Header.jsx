@@ -33,7 +33,7 @@ const Header = ( { currentPage } ) => {
 
                 {/* Menu for smaller devices */}
                 <div
-                    className={`fixed inset-0 flex items-center bg-black dark:bg-white bg-opacity-35  dark:bg-opacity-35 justify-center transition-opacity duration-300 z-10 ${
+                    className={`fixed inset-0 flex items-center bg-black bg-opacity-35 justify-center transition-opacity duration-300 z-10 ${
                         isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                     }`}
                     >
@@ -59,6 +59,7 @@ const Header = ( { currentPage } ) => {
                 </div>
 
 
+                {/* For Bigger Screens */}
                 <div className="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>

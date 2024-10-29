@@ -1,45 +1,53 @@
-"use client";
-import Header from "@/app/_components/Header";
-import CatSubNav from "@/app/_components/CatSubNav";
-import Footer from "@/app/_components/Footer";
-import Tiles from "@/app/_components/Tiles";
-import { useProduct } from "@/app/_store/ContextProvider";
-import { use } from 'react';
+import Head from "next/head";
+import Header from "../../_components/Header";
+import CatSubNav from "../../_components/CatSubNav";
+import Footer from "../../_components/Footer";
+import Categories from "../Categories";
 
-// auth 1.0
+export const metadata = {
+  title: "NovaNest | Catgeory",
+  description: " Browse product categories ",
+  openGraph: {
+    title: "NovaNest | Catgeory",
+    description: "Browse product categories",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png",
+    image: "public/ogLogo.png",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image", // Optional: Use if you want to customize Twitter Card
+    title: "NovaNest | Catgeory",
+    description: "Browse product categories",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png", // Twitter image URL
+  }
+};
 
-function Category({ params }) {
-  const { catName } = use(params);
-  const products = useProduct();
+export default async function Category({ params }) {
 
-  const category = products.filter((p) => p.category === catName);
-
+  const { catName } = await params;
 
   return (
-    <section id="category">
-      <Header currentPage="category" />
-      <CatSubNav currentPage={catName} />
-      <div className="bg-white dark:bg-black">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            {catName}
-          </h2>
-          {category.length > 0 ? (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-              {category.map((product) => (
-                <Tiles key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <h1 className="m-10 text-2xl text-center font-bold text-gray-900 dark:text-white">
-              No Products found
-            </h1>
-          )}
+    <>
+      <Head>
+        <title>Category</title>
+        <meta
+          name="description"
+          content="List items by their respective category"
+        />
+      </Head>
+
+      <section id="category">
+        <Header currentPage="category" />
+        <CatSubNav currentPage={catName} />
+
+        <div className="bg-white dark:bg-black">
+          <Categories targetCat={catName} />
         </div>
-      </div>
-      <Footer />
-    </section>
+
+        <Footer />
+      </section>
+    </>
   );
 }
 
-export default Category;
+

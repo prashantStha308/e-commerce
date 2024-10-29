@@ -5,6 +5,24 @@ import { products } from '@/app/layout';
 import AddToCart from '@/app/_components/AddToCart';
 import { notFound } from 'next/navigation';
 
+export const metadata = {
+  title: "NovaNest | Product",
+  description: " View all products in NovaNest ",
+  openGraph: {
+    title: "NovaNest | Product",
+    description: "View all products in NovaNest",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png",
+    image: "public/ogLogo.png",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image", // Optional: Use if you want to customize Twitter Card
+    title: "NovaNest | Product",
+    description: "View all products in NovaNest",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png", // Twitter image URL
+  }
+};
+
 
 
 export default async function ProductPage({ params }) {

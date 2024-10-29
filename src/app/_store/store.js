@@ -2,9 +2,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-// persist middleware stores the data in the localStorage
+// persist middleware to store data in localStorage
 
-const useProductStore = create(
+const productStore = create(
   persist(
     (set, get) => ({
       product: [],
@@ -64,11 +64,12 @@ const useProductStore = create(
         return sum;
       },
     }),
+    // Store the above data in localStorage
     {
-      name: "product-store", // Unique name for the storage key
-      getStorage: () => localStorage, // Use localStorage as the storage
+      name: "product-store", 
+      getStorage: () => localStorage,
     }
   )
 );
 
-export const useProductAtCheckout = () => useProductStore();
+export const useProductAtCheckout = () => productStore();
