@@ -1,25 +1,24 @@
-import Head from "next/head";
 import { sort } from "./_functions/prodFunctions";
 import { PageContext, ProductContextProvider } from "./_store/ContextProvider";
 import "./globals.css";
 
 export const metadata = {
   title: "NovaNest | Home",
-  description: " An e-commerce website. First project using Next.js ",
+  description: "An e-commerce website. First project using Next.js",
   openGraph: {
     title: "NovaNest | Home",
     description: "An e-commerce website. First project using Next.js",
     image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png",
-    image: "public/ogLogo.png",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image", // Optional: Use if you want to customize Twitter Card
+    card: "summary_large_image", 
     title: "NovaNest | Home",
     description: "An e-commerce website. First project using Next.js",
-    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png", // Twitter image URL
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png",
   }
 };
+
 
 // Array of product objects
 const productArr = [

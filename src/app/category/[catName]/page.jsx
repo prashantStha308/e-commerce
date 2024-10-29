@@ -5,20 +5,19 @@ import Footer from "../../_components/Footer";
 import Categories from "../Categories";
 
 export const metadata = {
-  title: "NovaNest | Catgeory",
-  description: " Browse product categories ",
+  title: "NovaNest | Category",
+  description: "An e-commerce website. First project using Next.js",
   openGraph: {
-    title: "NovaNest | Catgeory",
-    description: "Browse product categories",
-    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png",
-    image: "public/ogLogo.png",
+    title: "NovaNest | Category",
+    description: "An e-commerce website. First project using Next.js",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png", 
     type: "website",
   },
   twitter: {
-    card: "summary_large_image", // Optional: Use if you want to customize Twitter Card
-    title: "NovaNest | Catgeory",
-    description: "Browse product categories",
-    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png", // Twitter image URL
+    card: "summary_large_image", 
+    title: "NovaNest | Category",
+    description: "An e-commerce website. First project using Next.js",
+    image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png", 
   }
 };
 

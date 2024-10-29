@@ -1,5 +1,3 @@
-// Home Page
-
 "use client";
 import Header from "./_components/Header";
 import { useProduct } from "./_store/ContextProvider";
