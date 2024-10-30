@@ -12,7 +12,8 @@ const AddToCart = ({ id }) => {
 
     const allProducts = useProduct();
     const [count, setCount] = useState(0);
-    const { product , addProduct , removeProduct } = useProductAtCheckout();
+    const [ isFav , setIsFav ] = useState(false);
+    const { product , addProduct , removeProduct , addToFav } = useProductAtCheckout();
     const [ addToBag , setAddToBag ] = useState("Add To Cart");
     const targetProduct = product.find( item =>( item.id == id ) );
 
@@ -41,6 +42,12 @@ const AddToCart = ({ id }) => {
         clearInterval(intervalId.current); // Clear the interval after one change
         }, 3000);
     };
+
+    const handelSetIsFav = ()=>{
+        console.log("add to fav, triggererd")
+        addToFav(id);
+        setIsFav(true);
+    }
 
     // Update the quanity of the product.
     useEffect( ()=>{
@@ -103,7 +110,9 @@ const AddToCart = ({ id }) => {
 
                 <button
                     type="button"
-                    className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+                    className={` ml-4 flex items-center justify-center rounded-md px-3 py-3 hover:bg-gray-100   ${ isFav ? 'text-red-600 hover:text-red-500' : 'text-gray-400 hover:text-gray-500' }`} onClick={()=>{
+                        if( count != 0 ) handelSetIsFav();
+                    }}
                     >
                     <HeartIcon aria-hidden="true" className="h-6 w-6 flex-shrink-0" />
                     <span className="sr-only">Add to favorites</span>
