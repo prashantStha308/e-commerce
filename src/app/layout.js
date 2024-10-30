@@ -1,7 +1,9 @@
 import { sort } from "./_functions/prodFunctions";
-import { PageContext, ProductContextProvider } from "./_store/ContextProvider";
+import { ProductContextProvider } from "./_store/ContextProvider";
 import "./globals.css";
+import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
 
+// Page's Meta Data
 export const metadata = {
   title: "NovaNest | Home",
   description: "An e-commerce website. First project using Next.js",
@@ -18,6 +20,34 @@ export const metadata = {
     image: "https://e-commerce-zeta-tawny.vercel.app/ogLogo.png",
   }
 };
+
+// const KEY = process.env.NEXT_PUBLIC_KEY;
+// const SECRET = process.env.NEXT_PUBLIC_SECRETS;
+// const apiURL = "https://rojantamrakar.com.np/wp-json/wc/v3/"
+
+// const woocommerce = new WooCommerceRestApi({
+//   url: apiURL,
+//   consumerKey: KEY,
+//   consumerSecret: SECRET
+// })
+
+// // Function to get products
+// export const fetchProducts = async () => {
+//   try {
+//     const res = await woocommerce.get('products');
+//     if( res.status === 200 ){
+//       console.log( "Success Connect" );
+//       return response.data;
+//     }else{
+//       console.log( "Failed Fetch. Status: ", res.status )
+//       return [];
+//     }
+
+//   } catch (error) {
+//     console.error('Error fetching products:', error.res.data);
+//   }
+// };
+
 
 
 // Array of product objects
@@ -114,17 +144,20 @@ const productArr = [
   },
 ];
 
-export const products = sort( productArr );
+export const products = sort(productArr); // Sort the fetched products
+
 // RootLayout component
 export default function RootLayout({ children }) {
+
 
   return (
     <html lang="en">
       <body>
-        <ProductContextProvider value={products} >
+        <ProductContextProvider value={products}>
           {children}
         </ProductContextProvider>
       </body>
     </html>
   );
 }
+

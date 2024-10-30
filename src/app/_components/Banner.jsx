@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Banner = ( {product} ) => {
-  console.log("Banner Product: ",product);
 
   const imgStyle = {
     backgroundImage: `url(${product.images})`,

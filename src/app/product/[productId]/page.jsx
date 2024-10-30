@@ -23,9 +23,8 @@ export const metadata = {
 };
 
 
-
-
 export default async function ProductPage({ params }) {
+
 
     const { productId } = await params;
 

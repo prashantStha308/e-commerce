@@ -55,7 +55,6 @@ const AddToCart = ({ id }) => {
         };
     }, []);
 
-    console.log( "Products: ",product )
 
 
     return (

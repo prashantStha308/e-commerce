@@ -7,7 +7,10 @@ import Footer from "./_components/Footer";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+
 export default function Home() {
+
+
   const products = useProduct();
 
   // using the first 4 products as banners for now

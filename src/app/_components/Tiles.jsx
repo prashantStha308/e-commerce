@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Tiles = ({ product }) => {
-  console.log("Passed Product: ", product);
 
   return (
     <Link href={`/product/${product.id}`}>
