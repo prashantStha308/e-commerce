@@ -24,7 +24,7 @@ export default function Home() {
       setCurrentBanner(prevBanner => (prevBanner + 1) % bannerProducts.length);
     }, 3000);
 
-    return clearInterval(intervalId);
+    return ()=>clearInterval(intervalId);
   }, [bannerProducts.length]);
 
   return ( 
