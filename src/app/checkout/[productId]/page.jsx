@@ -7,12 +7,14 @@ import { useProductAtCheckout } from '@/app/_store/store'
 import { useEffect, useState } from 'react'
 
 const Checkout = () => {
-
+    // Importing required fields from useProductAtCheckout
     const { product , completeTotal  } = useProductAtCheckout();
+
+    // setting up state for totalPrice
     const [ totalPrice , setTotalPrice ] = useState(0)
 
+    // Everytime, product or completeTotal changes, and if product exists, call completeTotal() and round up the returned value
     useEffect(()=>{
-
         if (product) {
             const calculatedTotal = completeTotal();
             setTotalPrice(Math.round((calculatedTotal ?? 0) * 100) / 100);

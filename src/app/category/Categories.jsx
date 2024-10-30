@@ -4,8 +4,10 @@ import React from 'react'
 import Tiles from '@/app/_components/Tiles'
 import { useProduct } from '@/app/_store/ContextProvider';
 
+// Accepts a 'targetCat' prop to only display the products of that category
 const Categories = ({ targetCat }) => {
 
+  // Importing products in context Provider
   const product = useProduct();
   let target;
 

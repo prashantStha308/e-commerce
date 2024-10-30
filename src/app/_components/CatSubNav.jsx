@@ -1,5 +1,4 @@
 // Sub navbar for @/Linkpp/category/page.jsx
-
 "use client"
 import Link from 'next/link'
 import React from 'react'

@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useEffect } from 'react'
 import { HeartIcon , MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import { useProductAtCheckout } from '../_store/store'
@@ -9,14 +8,22 @@ import { useState , useRef } from 'react';
 
 
 const AddToCart = ({ id }) => {
-
+    // Importing all the available products in contextProvider
     const allProducts = useProduct();
+
+    // state for count
     const [count, setCount] = useState(0);
+    // state for favourite
     const [ isFav , setIsFav ] = useState(false);
-    const { product , addProduct , removeProduct , addToFav } = useProductAtCheckout();
+    // state for button's contents
     const [ addToBag , setAddToBag ] = useState("Add To Cart");
+    // imprting necessary functions from useProductAtCheckout
+    const { product , addProduct , removeProduct , addToFav } = useProductAtCheckout();
+
+    // finding the target product.
     const targetProduct = product.find( item =>( item.id == id ) );
 
+    // intervalId to updated the contents of 'Add to Cart' button
     const intervalId = useRef(null);
   
     // Increment the count
@@ -43,6 +50,7 @@ const AddToCart = ({ id }) => {
         }, 3000);
     };
 
+    // Update the value of isFav, also call the addToFav() function
     const handelSetIsFav = ()=>{
         console.log("add to fav, triggererd")
         addToFav(id);
@@ -56,12 +64,12 @@ const AddToCart = ({ id }) => {
         }
     }, [ targetProduct ])
 
+    // clear  interval if on reload, the setInterval is being triggered
     useEffect(() => {
         return () => {
         if (intervalId.current) clearInterval(intervalId.current);
         };
     }, []);
-
 
 
     return (

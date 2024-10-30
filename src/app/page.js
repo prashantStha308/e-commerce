@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default function Home() {
 
-
+  //Get all the products in contextProvider
   const products = useProduct();
 
   // using the first 4 products as banners for now
@@ -18,13 +18,13 @@ export default function Home() {
   const [ currentBanner , setCurrentBanner ] = useState(0);
 
   useEffect(() => {
-    // Set an interval to change the banner every 2 seconds
+    // Set an interval to change the banner every 3 seconds
     const intervalId = setInterval(() => {
       // Update the currentBanner state to cycle through bannerProducts
       setCurrentBanner(prevBanner => (prevBanner + 1) % bannerProducts.length);
     }, 3000);
 
-    return () => clearInterval(intervalId);
+    return clearInterval(intervalId);
   }, [bannerProducts.length]);
 
   return ( 
@@ -40,6 +40,7 @@ export default function Home() {
         <div className="grid grid-flow-row-dense grid-cols-2 gap-3 justify-between sm:grid-cols-3 md:grid-cols-4">
 
           {/* Map the product array and pass to Tile */}
+          {/* Need to insert a contion to be "Best Sellers" */}
           {
             products.map(product =>{
               return( <Tiles key={product.id} product={product} /> )

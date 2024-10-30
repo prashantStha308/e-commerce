@@ -3,6 +3,7 @@ import CatSubNav from "@/app/_components/CatSubNav";
 import Footer from "@/app/_components/Footer";
 import Categories from "@/app/category/Categories";
 
+// metaData of this page
 export const metadata = {
   title: "NovaNest | Category",
   description: "An e-commerce website. First project using Next.js",

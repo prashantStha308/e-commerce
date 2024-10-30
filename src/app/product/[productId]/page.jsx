@@ -25,15 +25,16 @@ export const metadata = {
 
 export default async function ProductPage({ params }) {
 
+  // await the productId from the url.
+  const { productId } = await params;
 
-    const { productId } = await params;
+  // find the product whose details are to be set
+  const product = products.find( item =>{
+    return (item.id == productId)
+  } );
 
-    const product = products.find( item =>{
-      return (item.id == productId)
-    } );
-
-    if( !product ){
-      notFound(); // If Id not found, go to 404 error page
+  if( !product ){
+    notFound(); // If Id not found, go to 404 error page
     }
 
 

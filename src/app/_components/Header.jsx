@@ -8,6 +8,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
  
 const Header = ( { currentPage } ) => {
 
+    // State for menu bar on smaller devices
     const [ isOpen , setIsOpen ] = useState(false);
     
     const handelIsOpen = ()=> setIsOpen(true);
