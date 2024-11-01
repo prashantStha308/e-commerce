@@ -1,4 +1,3 @@
-// Context Provider
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -6,59 +5,142 @@ import { configDotenv } from "dotenv";
 
 configDotenv();
 
-// Full url should look like:
-// https://rojantamrakar.com.np/wp-json/wc/v3/products?consumer_key=ck_XXXX&consumer_secret=cs_XXXXXXXX
-// structure= {link}/{endpoint}?{ck}&{cs}
+// Creating a Context with initial state
+const ProductContext = createContext(null);
 
-
-// Creating a Context. The initial value is an empty array
-export const ProductContext = createContext([]);
-
-// Api keys
+// API keys
 const KEY = process.env.NEXT_PUBLIC_KEY;
 const SECRET = process.env.NEXT_PUBLIC_SECRETS;
 const apiURL = process.env.NEXT_PUBLIC_URL;
 
-const fetchData = async ( req )=>{
-
-  console.log(`URL: ${apiURL}${req}?consumer_key=${KEY}&consumer_secret=${SECRET}`);
-
-  const res = await axios.get(`${apiURL}${req}?consumer_key=${KEY}&consumer_secret=${SECRET}`);
+const fetchData = async (req) => {
   try {
-    if( res.status === 200 ){
-      console.log("Success. Stauts: ", res.status);
+    const res = await axios.get(`${apiURL}${req}?consumer_key=${KEY}&consumer_secret=${SECRET}`);
+    if (res.status === 200) {
       return res.data;
-    }else{
-      console.error( "Fetch failed with status: ", res.status );
-      return;
+    } else {
+      console.error("Fetch failed with status:", res.status);
+      return [];
     }
   } catch (error) {
-    console.error( "Fetch Failed.",error );
+    console.error("Fetch Failed.", error);
+    return [];
   }
-
-}
+};
 
 // Context Provider Component
-export const ProductContextProvider = ({ children, value }) => {
+export const ProductContextProvider = ({ children }) => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [cart, setCart] = useState(() => {
+    // Initialize from localStorage if available
+    const storedCart = localStorage.getItem('cart');
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+  
+  const [isFav, setIsFav] = useState(() => {
+    // Initialize from localStorage if available
+    const storedFav = localStorage.getItem('isFav');
+    return storedFav ? JSON.parse(storedFav) : [];
+  });
 
-  // create products state variable to access the fetched data
-  const [ products , setProducts ] = useState(value);
-  const [ category , setCategory ] = useState(value);
-
-  // load data on page start/refresh
-  useEffect( ()=>{
-    const loadData = async ()=>{
+  // Load data 
+  useEffect(() => {
+    const loadData = async () => {
       const prod = await fetchData("products");
       const cat = await fetchData("products/categories");
-
       setProducts(prod);
-      setCategory(cat);
-    }
+      setCategories(cat);
+    };
     loadData();
-  }, [] )
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (cart.length > 0) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart]);
+
+  // Save isFav to localStorage whenever it changes
+  useEffect(() => {
+    if (isFav.length > 0) {
+      localStorage.setItem('isFav', JSON.stringify(isFav));
+    }
+  }, [isFav]);
+
+  const addProduct = (id, count) => {
+    const target = products.find((item) => item.id === id);
+    if (!target) {
+        return; // Return if target is not found
+    }
+    setCart((prev) => {
+        const existingProduct = prev.find((item) => item.id === target.id);
+
+        if (existingProduct) {
+            return prev.map((item) =>
+                item.id === id ? { ...item, userQuantity: count } : item
+            );
+        } else {
+            return [...prev, { ...target, userQuantity: count }];
+        }
+    });
+  };
+
+
+  const removeProduct = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const productTotal = (id) => {
+    const target = cart.find((item) => item.id === id);
+    return target ? target.userQuantity * target.price : 0;
+  };
+
+  const completeTotal = () => {
+    return cart.reduce((sum, item) => sum + item.price * item.userQuantity, 0);
+  };
+
+  const setFav = (id) => {
+    const target = products.find((item) => item.id === id);
+    if (!target) return false; // Return false if the product is not found
+
+    const existingProduct = isFav.find((item) => item.id === id);
+    let isFavourite;
+
+    if (existingProduct) {
+        console.log("Removing from favorites");
+        isFavourite = false;
+        setIsFav((prev) => prev.filter((item) => item.id !== id)); // Remove from favorites
+    } else {
+        console.log("Adding to favorites");
+        isFavourite = true;
+        setIsFav((prev) => [...prev, { ...target, isFav: true }]); // Add to favorites
+    }
+
+    console.log("Is Fav?: ", isFavourite);
+    return isFavourite; // Return the boolean value
+};
+
+
+  const listFav = () => {
+    return isFav; // Return the favorite items
+  };
 
   return (
-    <ProductContext.Provider value={{ products , category }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        categories,
+        cart,
+        addProduct,
+        removeProduct,
+        productTotal,
+        completeTotal,
+        setFav,
+        listFav,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );
