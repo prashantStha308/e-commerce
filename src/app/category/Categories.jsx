@@ -17,7 +17,7 @@ const Categories = ({ targetCat }) => {
   }
 
 //   if target is others, filter items.
-  if( targetCat === 'others' ){
+  if( targetCat === 'all' ){
 
     target = product.filter( items=>{
         return ( items.category !== 'beauty' && items.category !== 'art' || items.category === 'undefined' || items.category === "others"  )
