@@ -1,4 +1,4 @@
-// app/loading.js
+// LOADER ANIMATION
 
 export default function Loading() {
     return (
