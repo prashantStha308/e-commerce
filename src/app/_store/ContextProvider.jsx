@@ -9,9 +9,9 @@ configDotenv();
 const ProductContext = createContext(null);
 
 // API keys
-const KEY = process.env.NEXT_PUBLIC_KEY;
-const SECRET = process.env.NEXT_PUBLIC_SECRETS;
-const apiURL = process.env.NEXT_PUBLIC_URL;
+const KEY = process.env.KEY;
+const SECRET = process.env.SECRETS;
+const apiURL = process.env.URL;
 
 const fetchData = async (req) => {
   try {
