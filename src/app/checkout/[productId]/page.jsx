@@ -3,26 +3,26 @@
 import Bill from '@/app/_components/Bill'
 import Footer from '@/app/_components/Footer'
 import Header from '@/app/_components/Header'
-import { useProductAtCheckout } from '@/app/_store/store'
+import { useProduct } from '@/app/_store/ContextProvider'
 import { useEffect, useState } from 'react'
 
 const Checkout = () => {
-    // Importing required fields from useProductAtCheckout
-    const { product , completeTotal  } = useProductAtCheckout();
+    // Importing required fields from useproductsAtCheckout
+    const { cart=[] , completeTotal  } = useProduct();
 
     // setting up state for totalPrice
     const [ totalPrice , setTotalPrice ] = useState(0)
 
-    // Everytime, product or completeTotal changes, and if product exists, call completeTotal() and round up the returned value
+    // Everytime, cart or completeTotal changes, and if cart exists, call completeTotal() and round up the returned value
     useEffect(()=>{
-        if (product) {
+        if (cart) {
             const calculatedTotal = completeTotal();
             setTotalPrice(Math.round((calculatedTotal ?? 0) * 100) / 100);
         } else {
             setTotalPrice(0); 
         }
 
-    },[product , completeTotal ])
+    },[cart , completeTotal ])
 
 
   return (
@@ -459,14 +459,14 @@ const Checkout = () => {
                     <div className="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
 
                         {
-                            product ? product.map( item =>{
+                            cart ? cart.map( item =>{
                                 return( <Bill key={item.id} product={item} /> )
                             } ) ?? " " : " "
                         }
-
+                        {/* Total Price */}
                         <dl className="flex items-center justify-between gap-4 py-3">
                         <dt className="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                        <dd className="text-base font-bold text-gray-900 dark:text-white">$ {totalPrice} </dd>
+                        <dd className="text-base font-bold text-gray-900 dark:text-white">NRS. {totalPrice} </dd>
                         </dl>
                     </div>
                     </div>
