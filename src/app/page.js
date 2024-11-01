@@ -7,7 +7,6 @@ import Tiles from "./_components/Tiles";
 import Banner from "./_components/Banner";
 import Footer from "./_components/Footer";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Loading from "./_components/loading";
 import LowerBanner from "./_components/LowerBanner";
 
