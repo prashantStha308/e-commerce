@@ -1,5 +1,4 @@
-// @/app/src/product/[productId]/_ProductDetails.jsx
-
+// Product Details
 "use client";
 
 import { StarIcon } from '@heroicons/react/20/solid';
@@ -10,8 +9,6 @@ import Loading from '@/app/_components/loading';
 
 const ProductDetails = ({ productId }) => {
   const { products = [] } = useProduct();
-
-  console.log("Product Desc Page: ", products);
 
   // find the product whose details are to be set
   const target = products.find(item => item.id == productId);
@@ -58,7 +55,7 @@ const ProductDetails = ({ productId }) => {
 
         {/* Add to Cart */}
         <form className="mt-6">
-          <AddToCart id={target.id} />
+          <AddToCart id={target.id}  />
         </form>
 
         {/* Additional Details */}
