@@ -8,7 +8,7 @@ import { useProduct } from '@/app/_store/ContextProvider';
 const Categories = ({ targetCat }) => {
 
   // Importing products in context Provider
-  const product = useProduct();
+  const { product=[] , category = [] } = useProduct();
   let target;
 
 //   if target doesn't exist, exit/

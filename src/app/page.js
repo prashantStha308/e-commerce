@@ -6,17 +6,19 @@ import Banner from "./_components/Banner";
 import Footer from "./_components/Footer";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Loading from "./_components/loading";
 
 
 export default function Home() {
 
   //Get all the products in contextProvider
-  const products = useProduct();
+  const { products = [] } = useProduct();
 
   // using the first 4 products as banners for now
-  const bannerProducts = products.slice( 0 , 4 )
+  const bannerProducts = products
   const [ currentBanner , setCurrentBanner ] = useState(0);
 
+  // For banner
   useEffect(() => {
     // Set an interval to change the banner every 3 seconds
     const intervalId = setInterval(() => {
@@ -27,29 +29,40 @@ export default function Home() {
     return ()=>clearInterval(intervalId);
   }, [bannerProducts.length]);
 
+
   return ( 
     <div id="Home">
       <Header currentPage={'home'} />
+
+      {/* Banner */}
       <div className="bg-white dark:bg-black">
-        <Banner product={bannerProducts[currentBanner]} />
+        {/* <Banner product={bannerProducts[currentBanner]} /> */}
       </div>
         
+        {/* Product Tiles */}
       <div className="p-5 mx-auto max-w-screen-xl">
-        <h2 className="font-bold uppercase text-xl pb-4">Best sellers</h2>
-        
-        <div className="grid grid-flow-row-dense grid-cols-2 gap-3 justify-between sm:grid-cols-3 md:grid-cols-4">
+      {
+        products.length === 0 ?
+         <Loading />:
+         <>
+            <h2 className="font-bold uppercase text-xl pb-4">Best sellers</h2>
+            <div className="grid grid-flow-row-dense grid-cols-2 gap-3 justify-between sm:grid-cols-3 md:grid-cols-4">
 
-          {/* Map the product array and pass to Tile */}
-          {/* Need to insert a contion to be "Best Sellers" */}
-          {
-            products.map(product =>{
-              return( <Tiles key={product.id} product={product} /> )
-            })
-          }
-        
-        </div>
+              {/* Map the product array and pass to Tile */}
+              {/* Need to insert a contion to be "Best Sellers" */}
+              {
+                products.map(product =>{
+                  return( <Tiles key={product.id} product={product} /> )
+                })
+              }
+            
+            </div>
+         </>
+      }
+
       </div>
 
+      {/* Static unrelated banner */}
       <div className="bg-gray-500 text-white dark:bg-gray-800">
         <section className="py-5 mx-auto max-w-screen-xl  sm:flex flex-grow-0 sm:p-5">
           <article className="flex-col justify-center inline-flex self-stretch  p-6">
