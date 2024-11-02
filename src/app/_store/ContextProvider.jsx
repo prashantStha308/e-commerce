@@ -9,11 +9,13 @@ configDotenv();
 const ProductContext = createContext(null);
 
 // API keys
-const KEY = process.env.KEY;
-const SECRET = process.env.SECRETS;
-const apiURL = process.env.URL;
+const KEY = process.env.NEXT_PUBLIC_KEY;
+const SECRET = process.env.NEXT_PUBLIC_SECRETS;
+const apiURL = process.env.NEXT_PUBLIC_URL;
 
 const fetchData = async (req) => {
+  console.log(`KEY | SECRET | URL === ${KEY} | ${SECRET} | ${apiURL}`);
+
   try {
     const res = await axios.get(`${apiURL}${req}?consumer_key=${KEY}&consumer_secret=${SECRET}`);
     if (res.status === 200) {
@@ -32,19 +34,19 @@ const fetchData = async (req) => {
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [cart, setCart] = useState(() => {
-    // Initialize from localStorage if available
-    const storedCart = localStorage.getItem('cart');
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
-  
-  const [isFav, setIsFav] = useState(() => {
-    // Initialize from localStorage if available
-    const storedFav = localStorage.getItem('isFav');
-    return storedFav ? JSON.parse(storedFav) : [];
-  });
+  const [cart, setCart] = useState([]);
+  const [isFav, setIsFav] = useState([]);
 
-  // Load data 
+  // Initialize cart and isFav from localStorage after component mounts
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    const storedFav = localStorage.getItem('isFav');
+
+    if (storedCart) setCart(JSON.parse(storedCart));
+    if (storedFav) setIsFav(JSON.parse(storedFav));
+  }, []);
+
+  // Load data
   useEffect(() => {
     const loadData = async () => {
       const prod = await fetchData("products");
@@ -59,6 +61,8 @@ export const ProductContextProvider = ({ children }) => {
   useEffect(() => {
     if (cart.length > 0) {
       localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      localStorage.removeItem('cart'); // Clear localStorage when cart is empty
     }
   }, [cart]);
 
@@ -66,27 +70,27 @@ export const ProductContextProvider = ({ children }) => {
   useEffect(() => {
     if (isFav.length > 0) {
       localStorage.setItem('isFav', JSON.stringify(isFav));
+    } else {
+      localStorage.removeItem('isFav'); // Clear localStorage when isFav is empty
     }
   }, [isFav]);
 
   const addProduct = (id, count) => {
     const target = products.find((item) => item.id === id);
     if (!target) {
-        return; // Return if target is not found
+      return;
     }
     setCart((prev) => {
-        const existingProduct = prev.find((item) => item.id === target.id);
-
-        if (existingProduct) {
-            return prev.map((item) =>
-                item.id === id ? { ...item, userQuantity: count } : item
-            );
-        } else {
-            return [...prev, { ...target, userQuantity: count }];
-        }
+      const existingProduct = prev.find((item) => item.id === target.id);
+      if (existingProduct) {
+        return prev.map((item) =>
+          item.id === id ? { ...item, userQuantity: count } : item
+        );
+      } else {
+        return [...prev, { ...target, userQuantity: count }];
+      }
     });
   };
-
 
   const removeProduct = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
@@ -103,28 +107,27 @@ export const ProductContextProvider = ({ children }) => {
 
   const setFav = (id) => {
     const target = products.find((item) => item.id === id);
-    if (!target) return false; // Return false if the product is not found
+    if (!target) return false;
 
     const existingProduct = isFav.find((item) => item.id === id);
     let isFavourite;
 
     if (existingProduct) {
-        console.log("Removing from favorites");
-        isFavourite = false;
-        setIsFav((prev) => prev.filter((item) => item.id !== id)); // Remove from favorites
+      console.log("Removing from favorites");
+      isFavourite = false;
+      setIsFav((prev) => prev.filter((item) => item.id !== id));
     } else {
-        console.log("Adding to favorites");
-        isFavourite = true;
-        setIsFav((prev) => [...prev, { ...target, isFav: true }]); // Add to favorites
+      console.log("Adding to favorites");
+      isFavourite = true;
+      setIsFav((prev) => [...prev, { ...target, isFav: true }]);
     }
 
     console.log("Is Fav?: ", isFavourite);
-    return isFavourite; // Return the boolean value
-};
-
+    return isFavourite;
+  };
 
   const listFav = () => {
-    return isFav; // Return the favorite items
+    return isFav;
   };
 
   return (
