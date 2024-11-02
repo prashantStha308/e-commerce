@@ -3,7 +3,6 @@
 
 import { StarIcon } from '@heroicons/react/20/solid';
 import AddToCart from '@/app/_components/AddToCart';
-import { notFound } from 'next/navigation';
 import { useProduct } from '@/app/_store/ContextProvider';
 import Loading from '@/app/_components/loading';
 
@@ -39,14 +38,14 @@ const ProductDetails = ({ productId }) => {
         </div>
 
         {/* Reviews */}
-        <div className="mt-3">
+        {/* <div className="mt-3">
           <div className="flex items-center">
             {[0, 1, 2, 3, 4].map((rating) => (
               <StarIcon width={20} height={20} key={rating} aria-hidden="true" className="text-indigo-500" />
             ))}
             <p className="sr-only">{target.rating} out of 5 stars</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Description */}
         <div className="mt-6 space-y-6 text-base text-gray-700">
@@ -58,15 +57,6 @@ const ProductDetails = ({ productId }) => {
           <AddToCart id={target.id}  />
         </form>
 
-        {/* Additional Details */}
-        <section aria-labelledby="details-heading" className="mt-12 text-black dark:text-white">
-          <h2 id="details-heading">Additional details</h2>
-          <div className="divide-y divide-gray-200 border-t">
-            <article className="mt-4 text-left">
-              <p>{/* target.description */}</p>
-            </article>
-          </div>
-        </section>
       </div>
     </div>
   );

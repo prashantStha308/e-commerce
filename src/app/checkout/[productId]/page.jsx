@@ -1,7 +1,6 @@
 "use client"
 
 import Bill from '@/app/_components/Bill'
-import Footer from '@/app/_components/Footer'
 import Header from '@/app/_components/Header'
 import { useProduct } from '@/app/_store/ContextProvider'
 import { useEffect, useState } from 'react'
@@ -480,8 +479,6 @@ const Checkout = () => {
                 </div>
             </form>
         </section>
-        <Footer />
-
     </>
   )
 }

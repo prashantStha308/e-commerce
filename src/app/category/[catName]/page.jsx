@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Header from "../../_components/Header";
 import CatSubNav from "../../_components/CatSubNav";
-import Footer from "../../_components/Footer";
 import Categories from "../Categories";
 
 // metaData of this page
@@ -26,6 +25,8 @@ export default async function Category({ params }) {
 
   const { catName } = await params;
 
+  console.log(catName)
+
   return (
     <>
       <Head>
@@ -43,8 +44,6 @@ export default async function Category({ params }) {
         <div className="bg-white dark:bg-black">
           <Categories targetCat={catName} />
         </div>
-
-        <Footer />
       </section>
     </>
   );

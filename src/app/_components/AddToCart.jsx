@@ -5,15 +5,12 @@ import Link from 'next/link';
 import { useProduct } from '../_store/ContextProvider';
 
 const AddToCart = ({ id }) => {
-    const { cart = [] , addProduct, removeProduct, setFav } = useProduct();
+    const { cart = [] , addProduct, removeProduct } = useProduct();
 
     const [count, setCount] = useState(0);
-    const [isFav, setIsFav] = useState();
     const [addToBag, setAddToBag] = useState("Add To Cart");
     const [targetCart , setTargetCart] = useState([]);
     const intervalId = useRef(null);
-
-
 
     // Find the target product whenever the product list changes
     useEffect(() => {
@@ -50,14 +47,6 @@ const AddToCart = ({ id }) => {
         intervalId.current = setTimeout(() => {
             setAddToBag("Add To Cart");
         }, 3000);
-    };
-
-    const handelSetIsFav = () => {
-        const isFavourite =  setFav(id);
-
-        console.log("IsFav in atc:",isFavourite)
-
-        isFavourite ? setIsFav(true) : setIsFav(false)
     };
 
     // CLear interval on refresh, if setINterval still is triggered
@@ -114,14 +103,14 @@ const AddToCart = ({ id }) => {
                     </button>
                 </Link>
 
-                <button
+                {/* <button
                     type="button"
-                    className={`ml-4 flex items-center justify-center rounded-md px-3 py-3 hover:bg-gray-100 ${isFav ? 'text-red-600 hover:text-red-500' : 'text-gray-400 hover:text-gray-500'}`}
-                    onClick={handelSetIsFav}
+                    className={`ml-4 flex items-center justify-center rounded-md px-3 py-3 hover:bg-gray-100 ${fav ? 'text-red-600 hover:text-red-500' : 'text-gray-400 hover:text-gray-500'}`}
+                    onClick={handelsetFav}
                 >
                     <HeartIcon aria-hidden="true" className="h-6 w-6 flex-shrink-0" />
                     <span className="sr-only">Add to favorites</span>
-                </button>
+                </button> */}
             </div>
         </>
     );

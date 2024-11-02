@@ -1,7 +1,6 @@
 // Product Page
 
 import Header from '@/app/_components/Header';
-import Footer from '@/app/_components/Footer';
 import ProductDetails from './_ProductDetails';
 
 export const metadata = {
@@ -39,8 +38,6 @@ export default async function ProductPage({ params }) {
 
         </div>
       </div>
-
-      <Footer />
     </section>
   )
 }

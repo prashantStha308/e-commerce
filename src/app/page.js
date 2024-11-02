@@ -5,7 +5,6 @@ import Header from "./_components/Header";
 import { useProduct } from "./_store/ContextProvider";
 import Tiles from "./_components/Tiles";
 import Banner from "./_components/Banner";
-import Footer from "./_components/Footer";
 import { useEffect, useState } from "react";
 import Loading from "./_components/loading";
 import LowerBanner from "./_components/LowerBanner";
@@ -66,8 +65,6 @@ export default function Home() {
       </div>
 
       {products && <LowerBanner product={products[0]} />}
-
-      <Footer />
     </div>
   );
 }

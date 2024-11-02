@@ -35,15 +35,12 @@ export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
-  const [isFav, setIsFav] = useState([]);
 
   // Initialize cart and isFav from localStorage after component mounts
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
-    const storedFav = localStorage.getItem('isFav');
 
     if (storedCart) setCart(JSON.parse(storedCart));
-    if (storedFav) setIsFav(JSON.parse(storedFav));
   }, []);
 
   // Load data
@@ -66,14 +63,6 @@ export const ProductContextProvider = ({ children }) => {
     }
   }, [cart]);
 
-  // Save isFav to localStorage whenever it changes
-  useEffect(() => {
-    if (isFav.length > 0) {
-      localStorage.setItem('isFav', JSON.stringify(isFav));
-    } else {
-      localStorage.removeItem('isFav'); // Clear localStorage when isFav is empty
-    }
-  }, [isFav]);
 
   const addProduct = (id, count) => {
     const target = products.find((item) => item.id === id);
@@ -105,30 +94,6 @@ export const ProductContextProvider = ({ children }) => {
     return cart.reduce((sum, item) => sum + item.price * item.userQuantity, 0);
   };
 
-  const setFav = (id) => {
-    const target = products.find((item) => item.id === id);
-    if (!target) return false;
-
-    const existingProduct = isFav.find((item) => item.id === id);
-    let isFavourite;
-
-    if (existingProduct) {
-      console.log("Removing from favorites");
-      isFavourite = false;
-      setIsFav((prev) => prev.filter((item) => item.id !== id));
-    } else {
-      console.log("Adding to favorites");
-      isFavourite = true;
-      setIsFav((prev) => [...prev, { ...target, isFav: true }]);
-    }
-
-    console.log("Is Fav?: ", isFavourite);
-    return isFavourite;
-  };
-
-  const listFav = () => {
-    return isFav;
-  };
 
   return (
     <ProductContext.Provider
@@ -140,8 +105,6 @@ export const ProductContextProvider = ({ children }) => {
         removeProduct,
         productTotal,
         completeTotal,
-        setFav,
-        listFav,
       }}
     >
       {children}

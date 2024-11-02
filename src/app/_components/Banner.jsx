@@ -19,11 +19,9 @@ const Banner = ( {product} ) => {
 
   return (
     <div className="flex relative text-center">
-        {/* <h1 className="text-3xl tracking-wider text-gray-800 dark:text-gray-200 text-sha uppercase font-bold p-4 self-center z-10 content-center absolute text-center w-full md:text-4xl">Welcome to NovaNest </h1> */}
-        <div className=" h-72 object-cover block mx-auto  sm:block sm:w-full" style={imgStyle} >
+        <div className=" h-72 object-cover mx-auto bg-blue-600 bg-opacity-30 block w-full " style={imgStyle} >
         </div>
     </div>
-
     )
 }
 
