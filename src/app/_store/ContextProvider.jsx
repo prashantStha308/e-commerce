@@ -14,8 +14,6 @@ const SECRET = process.env.NEXT_PUBLIC_SECRETS;
 const apiURL = process.env.NEXT_PUBLIC_URL;
 
 const fetchData = async (req) => {
-  console.log(`KEY | SECRET | URL === ${KEY} | ${SECRET} | ${apiURL}`);
-
   try {
     const res = await axios.get(`${apiURL}${req}?consumer_key=${KEY}&consumer_secret=${SECRET}`);
     if (res.status === 200) {

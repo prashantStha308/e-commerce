@@ -8,8 +8,6 @@ const LowerBanner = ({ product }) => {
         return <Loading />
     }
 
-    console.log("LOwer Banner: ",product)
-
   return (
     <>
         <div className="bg-gray-500 text-white dark:bg-gray-800">

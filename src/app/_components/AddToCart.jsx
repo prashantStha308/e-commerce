@@ -21,10 +21,8 @@ const AddToCart = ({ id }) => {
     // Update the count based on targetProduct's userQuantity
     useEffect(() => {
         if (targetCart?.userQuantity) {
-            console.log("Updating Count: ", targetCart.userQuantity); // Debug log
             setCount(targetCart.userQuantity);
         } else {
-            console.log("No userQuantity found for targetCart."); // Debug log
         }
     }, [targetCart]);
 

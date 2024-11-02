@@ -14,7 +14,6 @@ export default function Home() {
 
   //Get all the products in contextProvider
   const { products = [] } = useProduct();
-  console.log("home",products)
 
   // using the first 4 products as banners for now
   const bannerProducts = products.slice(0,2);

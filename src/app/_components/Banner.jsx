@@ -15,8 +15,6 @@ const Banner = ( {product} ) => {
     backgroundPosition: 'center',
   }
 
-  console.log("upper Baner: ", product);
-
   return (
     <div className="flex relative text-center">
         <div className=" h-72 object-cover mx-auto bg-blue-600 bg-opacity-30 block w-full " style={imgStyle} >

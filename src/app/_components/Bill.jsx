@@ -8,15 +8,9 @@ const Bill = ( { product } ) => {
     // Importing 'productTotal' function form useProductAtCheckout()
     const { productTotal } = useProduct();
 
-    console.log(product)
-
     if( !product ){
         return <Loading />
     }
-
-    console.log("product: ",product)
-    console.log("Qty: ",product.userQuantity)
-
 
   return (
     <dl className="flex items-center justify-between gap-4 py-3">

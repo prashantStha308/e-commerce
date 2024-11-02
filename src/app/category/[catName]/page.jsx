@@ -25,8 +25,6 @@ export default async function Category({ params }) {
 
   const { catName } = await params;
 
-  console.log(catName)
-
   return (
     <>
       <Head>
