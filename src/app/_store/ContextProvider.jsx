@@ -1,56 +1,21 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { configDotenv } from "dotenv";
 
-configDotenv();
 
-// Creating a Context with initial state
 const ProductContext = createContext(null);
-
-// API keys
-const KEY = process.env.NEXT_PUBLIC_KEY;
-const SECRET = process.env.NEXT_PUBLIC_SECRETS;
-const apiURL = process.env.NEXT_PUBLIC_URL;
-
-const fetchData = async (req) => {
-  try {
-    const res = await axios.get(`${apiURL}${req}?consumer_key=${KEY}&consumer_secret=${SECRET}`);
-    if (res.status === 200) {
-      return res.data;
-    } else {
-      console.error("Fetch failed with status:", res.status);
-      return [];
-    }
-  } catch (error) {
-    console.error("Fetch Failed.", error);
-    return [];
-  }
-};
 
 // Context Provider Component
 export const ProductContextProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [cart, setCart] = useState([]);
 
-  // Initialize cart and isFav from localStorage after component mounts
+  const [cart, setCart] = useState([]);
+  const [visitedPages, setVisitedPages] = useState([]);
+
+  // Initialize cart from localStorage after component mounts
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
-
     if (storedCart) setCart(JSON.parse(storedCart));
   }, []);
 
-  // Load data
-  useEffect(() => {
-    const loadData = async () => {
-      const prod = await fetchData("products");
-      const cat = await fetchData("products/categories");
-      setProducts(prod);
-      setCategories(cat);
-    };
-    loadData();
-  }, []);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
@@ -62,16 +27,17 @@ export const ProductContextProvider = ({ children }) => {
   }, [cart]);
 
 
-  const addProduct = (id, count) => {
-    const target = products.find((item) => item.id === id);
+  const addProduct = (target, count) => {
+    console.log( "TArget in ADD: ",target )
     if (!target) {
       return;
     }
     setCart((prev) => {
       const existingProduct = prev.find((item) => item.id === target.id);
+      console.log("Exist:",existingProduct)
       if (existingProduct) {
         return prev.map((item) =>
-          item.id === id ? { ...item, userQuantity: count } : item
+          item.id === target.id ? { ...item, userQuantity: count } : item
         );
       } else {
         return [...prev, { ...target, userQuantity: count }];
@@ -96,8 +62,6 @@ export const ProductContextProvider = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
-        products,
-        categories,
         cart,
         addProduct,
         removeProduct,

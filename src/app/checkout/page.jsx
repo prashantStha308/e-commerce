@@ -3,6 +3,7 @@
 import Bill from '@/app/_components/Bill'
 import Header from '@/app/_components/Header'
 import { useProduct } from '@/app/_store/ContextProvider'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 const Checkout = () => {
@@ -80,10 +81,10 @@ const Checkout = () => {
                             <label htmlFor="select-country-input-3" className="block text-sm font-medium text-gray-900 dark:text-white"> Country* </label>
                         </div>
                         <select id="select-country-input-3" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                            <option defaultValue={'checked'} >United States</option>
+                            <option defaultValue={'checked'} >Nepal</option>
                             <option value="AS">Australia</option>
-                            <option value="FR">France</option>
-                            <option value="ES">Spain</option>
+                            <option value="FR">India</option>
+                            <option value="ES">United States</option>
                             <option value="UK">United Kingdom</option>
                         </select>
                         </div>
@@ -93,7 +94,7 @@ const Checkout = () => {
                             <label htmlFor="select-city-input-3" className="block text-sm font-medium text-gray-900 dark:text-white"> City* </label>
                         </div>
                         <select id="select-city-input-3" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                            <option defaultValue={true}>San Francisco</option>
+                            <option defaultValue={true}>Dharan</option>
                             <option value="NY">New York</option>
                             <option value="LA">Los Angeles</option>
                             <option value="CH">Chicago</option>
@@ -455,25 +456,25 @@ const Checkout = () => {
 
                 <div className="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
                     <div className="flow-root">
-                    <div className="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
+                        <div className="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
 
-                        {
-                            cart ? cart.map( item =>{
-                                return( <Bill key={item.id} product={item} /> )
-                            } ) ?? " " : " "
-                        }
-                        {/* Total Price */}
-                        <dl className="flex items-center justify-between gap-4 py-3">
-                        <dt className="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                        <dd className="text-base font-bold text-gray-900 dark:text-white">NRS. {totalPrice} </dd>
-                        </dl>
-                    </div>
+                            {
+                                cart ? cart.map( item =>{
+                                    return( <Bill key={item.id} product={item} /> )
+                                } ) ?? " " : " "
+                            }
+                            {/* Total Price */}
+                            <dl className="flex items-center justify-between gap-4 py-3">
+                            <dt className="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+                            <dd className="text-base font-bold text-gray-900 dark:text-white">NRS. {totalPrice} </dd>
+                            </dl>
+                        </div>
                     </div>
 
                     <div className="space-y-3">
-                    <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Proceed to Payment</button>
+                        <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Proceed to Payment</button>
 
-                    <p className="text-sm font-normal text-gray-500 dark:text-gray-400">One or more items in your cart require an account. <a href="#" title="" className="font-medium text-primary-700 underline hover:no-underline dark:text-primary-500">Sign in or create an account now.</a>.</p>
+                        <p className="text-sm font-normal text-gray-500 dark:text-gray-400">One or more items in your cart require an account. <Link href="/signin" title="" className="font-medium text-primary-700 underline hover:no-underline dark:text-primary-500">Sign in or create an account now.</Link>.</p>
                     </div>
                 </div>
                 </div>

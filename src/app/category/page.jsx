@@ -23,19 +23,18 @@ export const metadata = {
 
 export default function CategoryAll() {
 
-
   return (
     <>
       <section id="category">
         <Header currentPage="category" />
         <CatSubNav currentPage="all" />
-
         <div className="bg-white dark:bg-black">
           <Categories />
         </div>
       </section>
     </>
   );
+
 }
 
 

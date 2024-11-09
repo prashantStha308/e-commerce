@@ -2,10 +2,23 @@
 
 import React from 'react';
 import Tiles from '@/app/_components/Tiles';
-import { useProduct } from '@/app/_store/ContextProvider';
+import { useQuery } from '@tanstack/react-query';
+import { fetchData } from '../_store/store';
 
 const Categories = ({ targetCat = 'all' }) => {
-  const { products = [], categories = [] } = useProduct();
+
+  const { data: products = [], isLoading, error } = useQuery({
+    queryFn: () => fetchData("products"),
+    queryKey: ['fetchProducts'],
+  });
+
+  if (isLoading) {
+    console.log('Loading...');
+  }
+  if (error) {
+    console.log('An error has occurred: ' + error.message);
+  }
+
 
   // Filter products based on the target category
   const target = targetCat === 'all'

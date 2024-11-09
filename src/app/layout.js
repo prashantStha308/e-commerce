@@ -1,5 +1,8 @@
 import { ProductContextProvider } from "./_store/ContextProvider";
+import { UserContextProvider } from "./_store/UserContext";
+import Store from "./_store/store";
 import Footer from "./_components/Footer";
+import ThemeToggle from "./_components/ToggleTheme";
 import "./globals.css";
 
 // Page's Meta Data
@@ -23,16 +26,22 @@ export const metadata = {
 // RootLayout component
 export default function RootLayout({ children }) {
 
-
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
     <body className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
-        <ProductContextProvider>
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </ProductContextProvider>
+
+      <UserContextProvider>
+        <Store>
+          <ProductContextProvider>
+            <main className="flex-1">
+              <ThemeToggle />
+              {children}
+            </main>
+            <Footer />
+          </ProductContextProvider>
+        </Store>
+      </UserContextProvider>
+
       </body>
     </html>
   );

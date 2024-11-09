@@ -1,12 +1,11 @@
 "use client"
-
 import { useProduct } from "../_store/ContextProvider";
-import { useState , useEffect } from "react";
 import Loading from "./loading";
 
+
 const Bill = ( { product } ) => {
-    // Importing 'productTotal' function form useProductAtCheckout()
     const { productTotal } = useProduct();
+    console.log(product)
 
     if( !product ){
         return <Loading />

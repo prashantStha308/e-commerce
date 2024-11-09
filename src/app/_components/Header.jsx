@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import { UserCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import ThemeToggle from "./ToggleTheme";
 
  
 const Header = ( { currentPage } ) => {
@@ -22,7 +23,7 @@ const Header = ( { currentPage } ) => {
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image src="https://flowbite.com/docs/images/logo.svg" alt="Flowbite Logo" width={32} height={20} />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">NovaNest</span>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">NovaNest</span>
                 </Link>
                 {/* Button On click, open the menu bar, for smaller devices */}
                 <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default sm:block" aria-expanded="false" onClick={handelIsOpen}>
@@ -40,38 +41,58 @@ const Header = ( { currentPage } ) => {
                     >
                     <div className="bg-red p-6 rounded-lg max-w-sm w-full">
 
-                        <ul className="h-full w-40 fixed top-0 right-0 pt-20 font-medium bg-gray-800 dark:bg-gray-800 text-white dark:text-white ">
+                        <ul className="h-full w-40 fixed top-0 right-0 pt-20 pl-4 font-medium bg-gray-800 dark:bg-gray-800 text-white dark:text-white ">
+
+                            <div className=" absolute top-0 right-0 w-full mt-4 flex justify-between align-middle">
+                                <button
+                                onClick={ handelIsClose }
+                                className=" p-4 text-white rounded]"
+                                >
+                                    <XMarkIcon width={20} />
+                                </button>
+
+                                <Link href="/login">
+                                    <div className="mr-2">
+                                        <UserCircleIcon width={40} height={40} />
+                                    </div>
+                                </Link>
+                            </div>
+
                             <li>
-                            <Link href="/" className={`block py-2 px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'home' ? "text-blue-700 md:dark:text-blue-500" : ""  }`} >Home</Link>
+                            <Link href="/" className={`block py-2 text-xl px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'home' ? "text-blue-700 md:dark:text-blue-500" : ""  }`} >Home</Link>
                             </li>
 
                             <li>
-                            <Link href="/category" className={`block py-2 px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'category' ? "text-blue-700 md:dark:text-blue-500" : ""  }`}>Category</Link>
+                            <Link href="/category" className={`block py-2 text-xl px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'category' ? "text-blue-700 md:dark:text-blue-500" : ""  }`}>Category</Link>
                             </li>
                         </ul>
-
-                        <button
-                        onClick={ handelIsClose }
-                        className="mt-4 p-4 text-white rounded absolute top-0 right-[7rem]"
-                        >
-                            <XMarkIcon width={20} />
-                        </button>
                     </div>
                 </div>
 
 
                 {/* For Bigger Screens */}
-                <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <div className=" hidden w-full md:block md:w-auto" id="navbar-default">
+                <ThemeToggle />
+                    <ul className="font-medium flex flex-col align-middle  p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+
                         <li>
-                        <Link href="/" className={`block py-2 px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'home' ? "text-blue-700 md:dark:text-blue-500" : ""  }`} >Home</Link>
+                            <Link href="/" className={`block py-2 text-xl px-3 md:p-0 text-gray-900 dark:text-gray-100  bg-transparent hover:text-blue-500 dark:hover:text-blue-500 ${ currentPage === 'home' ? "text-blue-700 md:dark:text-blue-500" : ""  }`} >Home</Link>
                         </li>
 
                         <li>
-                        <Link href="/category" className={`block py-2 px-3 md:p-0  bg-transparent hover:text-blue-500 ${ currentPage === 'category' ? "text-blue-700 md:dark:text-blue-500" : ""  }`}>Category</Link>
+                            <Link href="/category" className={`block py-2 text-xl px-3 md:p-0 text-gray-900 dark:text-gray-100 bg-transparent hover:text-blue-500 dark:hover:text-blue-500 ${ currentPage === 'category' ? "text-blue-700 md:dark:text-blue-500" : ""  }`}>Category</Link>
+                        </li>
+
+                        <li>
+                            <Link href="/signin">
+                                <div className="flex justify-center align-middle text-gray-900 dark:text-gray-200">
+                                    <UserCircleIcon width={40} height={40} />
+                                </div>
+                            </Link>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </nav>
 

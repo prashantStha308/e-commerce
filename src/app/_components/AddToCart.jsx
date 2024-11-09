@@ -4,7 +4,7 @@ import { HeartIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
 import { useProduct } from '../_store/ContextProvider';
 
-const AddToCart = ({ id }) => {
+const AddToCart = ({ target = {} }) => {
     const { cart = [] , addProduct, removeProduct } = useProduct();
 
     const [count, setCount] = useState(0);
@@ -14,9 +14,9 @@ const AddToCart = ({ id }) => {
 
     // Find the target product whenever the product list changes
     useEffect(() => {
-        const foundCart = cart.find(item => item.id === id);
+        const foundCart = cart.find(item => item.id === target.id);
         setTargetCart(foundCart);
-    }, [cart, id]);
+    }, [cart, target]);
 
     // Update the count based on targetProduct's userQuantity
     useEffect(() => {
@@ -56,7 +56,7 @@ const AddToCart = ({ id }) => {
 
     const handleAddToCart = () => {
         if (count > 0) {
-            addProduct(id, count);
+            addProduct(target, count);
             setCount(count); 
             handelAddToBag();
         }
@@ -73,7 +73,7 @@ const AddToCart = ({ id }) => {
                     <MinusIcon width={40} height={40} />
                 </button>
 
-                <span className="border border-black dark:border-white py-2 px-3">{count}</span>
+                <span className="border border-black dark:border-white text-gray-900 dark:text-gray-100 py-2 px-3">{count}</span>
 
                 <button
                     type='button'
@@ -93,7 +93,7 @@ const AddToCart = ({ id }) => {
                     {addToBag}
                 </button>
 
-                <Link href={`/checkout/${id}`}>
+                <Link href={`/checkout`}>
                     <button
                         type="button"
                         className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white hover:bg-indigo-700">

@@ -16,8 +16,8 @@ const Tiles = ({ product }) => {
           height={192}
           width={500}
         />
-        <h2 className="pt-2 m-0 leading-4 font-semibold">{product.name}</h2>
-        <p>$ {product.price} </p>
+        <h2 className="pt-2 m-0 leading-4 font-semibold text-gray-900 dark:text-gray-100">{product.name}</h2>
+        <p className='text-gray-900 dark:text-gray-100 '>NRP. {product.price} </p>
         {product.stock_status ? (
           <p className="text-green-500 italic font-medium">In Stock</p>
         ) : (
