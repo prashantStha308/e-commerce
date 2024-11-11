@@ -16,14 +16,14 @@ export default function ThemeToggle() {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
-    localStorage.setItem('theme', newTheme); // Save preference
+    localStorage.setItem('theme', newTheme);
   };
 
   return (
-    <div className=' fixed bottom-8 right-16 '>
+    <div className=' fixed bottom-8 right-4 sm:right-16 z-50 '>
       <button
         onClick={toggleTheme}
-        className="p-8 rounded-full bg-gray-300 dark:bg-gray-400 text-gray-900"
+        className="p-4 rounded-full bg-gray-300 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
       >
         {theme === 'light' ? <SunIcon width={30} height={30} /> : <MoonIcon width={30} height={30} />}
       </button>

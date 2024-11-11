@@ -76,7 +76,7 @@ const AddToCart = ({ target = {} }) => {
 
     return (
         <>
-            {(isLogged || isOpen) && (
+            {(isOpen) && (
                 <Modal onClose={handelModalClose} title="Not Logged in" message="Please Log in to add the product to your cart and checkout" login={true} />
             )}
             <div className="flex items-center gap-4">

@@ -1,7 +1,6 @@
 // useQuery Store
 "use client"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import axios from 'axios';
 import { configDotenv } from 'dotenv';
 
@@ -47,7 +46,6 @@ const Store = ({children}) => {
   return (
     <QueryClientProvider client={queryClient}>
         {children}
-        <ReactQueryDevtools initialIsOpen={false} /> 
     </QueryClientProvider>
   )
 }
