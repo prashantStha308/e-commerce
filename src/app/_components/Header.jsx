@@ -21,10 +21,7 @@ const Header = ( { currentPage } ) => {
     const handelIsOpen = ()=> setIsOpen(true);
     const handelIsClose = ()=> setIsOpen(false);
 
-    const redirect = ()=>{
-        console.log(isLogged)
-        console.log(currentUser)
-    
+    const redirect = ()=>{    
         isLogged ? router.push(`/user/${currentUser.id}`)
         : router.push('/signin');
     }
