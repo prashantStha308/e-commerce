@@ -5,16 +5,29 @@ import Link from "next/link";
 import { useState } from "react";
 import { UserCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import ThemeToggle from "./ToggleTheme";
+import { useUser } from "@/app/_store/UserContext";
+import { useRouter } from "next/navigation";
 
  
 const Header = ( { currentPage } ) => {
 
+    // Logged status 
+    const { isLogged , currentUser } = useUser();
+    const router = useRouter();
+
     // State for menu bar on smaller devices
     const [ isOpen , setIsOpen ] = useState(false);
-    
+
     const handelIsOpen = ()=> setIsOpen(true);
     const handelIsClose = ()=> setIsOpen(false);
 
+    const redirect = ()=>{
+        console.log(isLogged)
+        console.log(currentUser)
+    
+        isLogged ? router.push(`/user/${currentUser.id}`)
+        : router.push('/signin');
+    }
 
     
   return (
@@ -51,11 +64,11 @@ const Header = ( { currentPage } ) => {
                                     <XMarkIcon width={20} />
                                 </button>
 
-                                <Link href="/login">
+                                <button onClick={redirect} className="bg-transparent">
                                     <div className="mr-2">
                                         <UserCircleIcon width={40} height={40} />
                                     </div>
-                                </Link>
+                                </button>
                             </div>
 
                             <li>
@@ -84,11 +97,11 @@ const Header = ( { currentPage } ) => {
                         </li>
 
                         <li>
-                            <Link href="/signin">
+                            <button onClick={redirect} className="bg-transparent">
                                 <div className="flex justify-center align-middle text-gray-900 dark:text-gray-200">
                                     <UserCircleIcon width={40} height={40} />
                                 </div>
-                            </Link>
+                            </button>
                         </li>
                     </ul>
                 </div>

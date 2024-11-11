@@ -1,5 +1,4 @@
 // HOME PAGE
-
 "use client";
 import Header from "./_components/Header";
 import Tiles from "./_components/Tiles";

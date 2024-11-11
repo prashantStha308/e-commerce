@@ -2,7 +2,7 @@
 import { configDotenv } from "dotenv";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-
+ 
 
 configDotenv();
 // API keys
@@ -43,52 +43,54 @@ export const UserContextProvider =  ({ children }) => {
     }
   }
 
-  // Gets all existing users
-  const getUsers = async () => {
+
+  // Gets a user by email
+  const getUserByEmail = async (email) => {
     try {
-      const res = await axios.get(`${apiURL}wc/v3/customers?consumer_key=${KEY}&consumer_secret=${SECRET}`);
-      if (res.status === 200) {
-        return { status: "success", data: res.data, message: "Users Found" };
-      }
-    } catch (error) {
-      console.log("Error fetching users:", error.response?.data);
-      return { status: "failed", data: null, message: error.response?.data };
-    }
-  };
-  
-//   Find the target user
-  const findTargetUser = async (email, password) => {
-    try {
-      const { status, data } = await getUsers();
-  
-      if (status !== "success" || !data) {
-        console.log("Unexpected response structure from getUsers");
-        return { status: "failed", data: null, message: "Unexpected response structure" };
-      }
-    //   Find Target
-      const target = data.find(item => item?.email === email);
-  
-      if (target) {
-        return { status: "found", data: target, message: "User found" };
+      const res = await axios.get(`${apiURL}wc/v3/customers`, {
+        params: {
+          consumer_key: KEY,
+          consumer_secret: SECRET,
+          email: email,
+        },
+      });
+
+      if (res.status === 200 && res.data.length > 0) {
+        return { status: "found", data: res.data[0], message: "User found" };
       } else {
         return { status: "not_found", data: null, message: "User not found" };
       }
     } catch (error) {
-      console.log("Error in finding user:", error.response?.data);
+      console.error("Error fetching user by email:", error.response?.data);
+      return { status: "failed", data: null, message: error.response?.data };
+    }
+  };
+
+  // Gets a user by id
+  const getUserById = async (uId) => {
+    try {
+      const res = await axios.get(`${apiURL}wc/v3/customers/${uId}?consumer_key=${KEY}&consumer_secret=${SECRET}`);
+  
+      if (res.status === 200 && res.data.length > 0) {
+        return { status: "found", data: res.data[0], message: "User found" };
+      } else {
+        return { status: "not_found", data: null, message: "User not found" };
+      }
+    } catch (error) {
+      console.error("Error fetching user by email:", error.response?.data);
       return { status: "failed", data: null, message: error.response?.data };
     }
   };
 
   // Log In
   const signIn = async (email, password)=>{
-    const { status , data , message } = await findTargetUser(email, password);
+    const { status , data , message } = await getUserByEmail(email, password);
     if( status === 'found' ){
       setCurrentUser(data);
       setIsLogged(true);
       localStorage.setItem( "currentUser", JSON.stringify(data) );
       localStorage.setItem( "isLogged", "true" );
     }
-
     return { status: status , data: data , message: message };
   }
 
@@ -102,7 +104,6 @@ export const UserContextProvider =  ({ children }) => {
       localStorage.setItem( "currentUser", JSON.stringify(userData) );
       localStorage.setItem( "isLogged", "true" );
     }
-
     return { status: status , status_code: status_code , message: message };
   }
 
@@ -138,6 +139,7 @@ export const UserContextProvider =  ({ children }) => {
         signUp,
         signIn,
         deleteUser,
+        getUserById,
         isLogged,
         currentUser,
     }}>

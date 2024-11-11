@@ -16,7 +16,12 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'rojantamrakar.com.np',
             port: '',
-          }
+          },
+          {
+            protocol: 'https',
+            hostname: 'secure.gravatar.com',
+            port: '',
+          },
         ],
       },
 };

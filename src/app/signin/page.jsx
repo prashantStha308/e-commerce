@@ -4,6 +4,7 @@ import Header from '../_components/Header'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useUser } from '../_store/UserContext'
+import Loading from '../_components/loading'
 
 // Login Component
 const LoginPage = () => {
@@ -12,6 +13,7 @@ const LoginPage = () => {
 
     const [ email , setEmail ] = useState("");
     const [ password , setPassword ] = useState("");
+    const [ isLoading , setIsLoading ] = useState(false);
 
     const handelEmail = (e)=>{
         setEmail(e.target.value)
@@ -23,8 +25,10 @@ const LoginPage = () => {
     
     const handelSignIn = async (e)=>{
         e.preventDefault();
-
+        
+        setIsLoading(true)
         const { status , data , message } = await signIn( email , password );
+        setIsLoading(false)
         if( status === 'found' ){
             router.back();
         }
@@ -34,6 +38,7 @@ const LoginPage = () => {
   return (
     <>
         <Header />
+        { isLoading && <Loading styles={'signin-loader'} /> }
         <div className="bg-gray-50 dark:bg-gray-800 font-[sans-serif]">
             <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
                 <div className="max-w-md w-full">
