@@ -39,7 +39,7 @@ export default function Home() {
       <Header currentPage={'home'} />
 
       {/* Banner */}
-      <div className="bg-white dark:bg-black">
+      <div className="bg-white dark:bg-gray-900">
         <Banner product={bannerProducts[currentBanner]} />
       </div>
         

@@ -20,7 +20,6 @@ export const UserContextProvider =  ({ children }) => {
 
     // createUser function
   const createUser = async ( userData )=>{
-    console.log(`${apiURL}wc/v3/customers?consumer_key=${KEY}&consumer_secret=${SECRET}`)
     try {
         const res = await axios.post( `${apiURL}wc/v3/customers?consumer_key=${KEY}&consumer_secret=${SECRET}` , userData );
         if( res.status === 201 ){
@@ -38,7 +37,6 @@ export const UserContextProvider =  ({ children }) => {
     }
     catch (error) {
       console.log(error.response?.data.data.status)
-      console.log(error.response?.data.status )
       return{ status: "failed" , status_code: error.response?.data.data.status , message: error.response?.data.message };
     }
   }
@@ -119,8 +117,6 @@ export const UserContextProvider =  ({ children }) => {
 
   // Deletes user of ID: customer_id
   const deleteUser = async ( customer_id ) =>{
-
-    console.log(`${apiURL}wc/v3/customers/${customer_id}?consumer_key=${KEY}&consumer_secret=${SECRET}&force=true`);
     try {
       const res = await axios.delete(`${apiURL}wc/v3/customers/${customer_id}?consumer_key=${KEY}&consumer_secret=${SECRET}&force=true`,);
       if(res.status === 200){

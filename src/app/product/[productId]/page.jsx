@@ -24,7 +24,6 @@ export const metadata = {
 export default async function ProductPage({ params }) {
   // await the productId from the url.
   const { productId } = await params;
-  console.log("PRoduct Page")
 
   return (
     <section id="product" className='w-full h-full mb-16'>

@@ -5,12 +5,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useUser } from '../_store/UserContext'
 import Loading from '../_components/loading'
+import Modal from '../_components/Modal'
 
 // Login Component
 const LoginPage = () => {
+    
     const router = useRouter();
     const { signIn } = useUser();
 
+    const [ isOpen , setIsOpen ] = useState(false);
     const [ email , setEmail ] = useState("");
     const [ password , setPassword ] = useState("");
     const [ isLoading , setIsLoading ] = useState(false);
@@ -30,8 +33,15 @@ const LoginPage = () => {
         const { status , data , message } = await signIn( email , password );
         setIsLoading(false)
         if( status === 'found' ){
+            setIsOpen(false)
             router.back();
+        }else{
+            setIsOpen(true)
         }
+    }
+
+    const handelModalClose = () => {
+        setIsOpen(false);
     }
 
     
@@ -39,6 +49,7 @@ const LoginPage = () => {
     <>
         <Header />
         { isLoading && <Loading styles={'signin-loader'} /> }
+        { isOpen && <Modal onClose={handelModalClose} title={'User Found'} message={'Inavlid email or password'} /> }
         <div className="bg-gray-50 dark:bg-gray-800 font-[sans-serif]">
             <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
                 <div className="max-w-md w-full">

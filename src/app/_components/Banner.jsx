@@ -9,7 +9,7 @@ const Banner = ( {product} ) => {
 
   // styles for banner
   const imgStyle = {
-    backgroundImage: `url(${product.images[0].src})`,
+    backgroundImage: `url(${product.images[0]?.src})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: `15rem auto`,
     backgroundPosition: 'center',

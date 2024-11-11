@@ -16,8 +16,23 @@ const Tiles = ({ product }) => {
           height={192}
           width={500}
         />
-        <h2 className="pt-2 m-0 leading-4 font-semibold text-gray-900 dark:text-gray-100">{product.name}</h2>
-        <p className='text-gray-900 dark:text-gray-100 '>NRP. {product.price} </p>
+        <h2 className="pt-2 m-0 mb-2 leading-4 text-xl font-semibold text-gray-900 dark:text-gray-100">{product.name}</h2>
+
+        <div>
+          {
+            product.sale_price > 0 ? (
+              <>
+                <s className='opacity-60'>
+                  <span className='text-gray-900 dark:text-gray-100 text-base'>NRP. {product.regular_price}</span>
+                </s>
+                <span className='text-gray-900 dark:text-gray-100 text-xl ml-2'>NRP. {product.sale_price}</span>
+              </>
+            ) : (
+              <span className='text-gray-900 dark:text-gray-100 text-base'>NRP. {product.regular_price}</span>
+            )
+          }
+        </div>
+
         {product.stock_status ? (
           <p className="text-green-500 italic font-medium">In Stock</p>
         ) : (

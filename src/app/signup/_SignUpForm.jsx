@@ -25,33 +25,26 @@ const SignUpForm = () => {
         setIsLoading(false)
 
         if( status_code === 201 ){
-            console.log( "User Created" )
             setModal({ isOpen: true , title: "User Created" , message: "User Creation Successfull." });
             router.back();
 
         } else if( status_code === 400 ){ //if bad request
 
             if( message.includes('email') ){
-                console.log("EMAIL ERRROR");
 
                 setModal({ isOpen: true , title: "Email Exists" , message: "There is another account with the submitted email" });
 
             }else if( message.includes('username') ){
-                console.log("USERNAME ERRROR");
 
                 setModal({ isOpen: true , title: "Pick another Username" , message: " User with this user name exists. Please pick a different Username " })
 
             }else{
-                console.log("ELSE MA AAYO WTF");
-                console.log("message:", message)
 
                 setModal({ isOpen: true , title: "Unexpected Error" , message: " An unexpected error has occured " })
 
             }
 
         } else{
-            console.log("LASTTTT KO ELSE MA AAYO WTFFFFF");
-            console.log("message:", message)
 
             setModal({ isOpen: true , title: "Unexpected Error" , message: " An unexpected error has occured " })
         }
@@ -80,11 +73,11 @@ const SignUpForm = () => {
                 country: formData.get('country'),
                 city: formData.get('city'),
                 email: formData.get('email'),
-                state: "",
+                state: formData.get('state'),
                 first_name: formData.get('first_name'),
                 last_name: formData.get('last_name'),
-                company: "",
-                postcode: "",
+                company: formData.get('company'),
+                postcode: formData.get('postcode'),
                 address_1: "",
                 address_2: "",
             },
@@ -93,18 +86,17 @@ const SignUpForm = () => {
                 country: formData.get('country'),
                 city: formData.get('city'),
                 email: formData.get('email'),
-                state: "",
+                state: formData.get('state'),
                 first_name: formData.get('first_name'),
                 last_name: formData.get('last_name'),
-                company: "",
-                postcode: "",
+                company: formData.get('company'),
+                postcode: formData.get('postcode'),
                 address_1: "",
                 address_2: "",
             },
             is_paying_customer: "",
             avatar_url: "https://secure.gravatar.com/avatar/52168962f3d5dfc43a30c789f8fc03ef?s=96&d=mm&r=g",
         }
-        console.log(userData)
         userCreation(userData)
     }
 
@@ -139,18 +131,36 @@ const SignUpForm = () => {
                 </div>
 
                 <div>
+                    <label className="signup-form-inputs">Company name</label>
+                    <input name="company" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all" placeholder="Enter your Company" />
+                </div>
+
+                <div>
                     <label className="signup-form-inputs">Country*</label>
                     <input name="country" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all" placeholder="Enter your Country" required/>
                 </div>
+
+                <div>
+                    <label className="signup-form-inputs">State</label>
+                    <input name="state" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all" placeholder="Enter your State" />
+                </div>
+
                 <div>
                     <label className="signup-form-inputs">City*</label>
-                    <input name="city" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all" placeholder="Enter you City" required />
+                    <input name="city" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all" placeholder="Enter your City" required />
+                </div>
+
+                <div>
+                    <label className="signup-form-inputs">Post code*</label>
+                    <input name="postcode" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all" placeholder="Enter your Post code" required />
                 </div>
 
                 <div>
                     <label className="signup-form-inputs">Password*</label>
                     <input name="password" type="password" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all" placeholder="Enter password" required/>
                 </div>
+
+                
 
             </div>
 

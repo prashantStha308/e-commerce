@@ -7,7 +7,6 @@ import { fetchData } from '@/app/_store/store';
 import ProductsTabs from '@/app/_components/_products/ProductsTabs';
 
 const ProductDetails = ({ productId }) => {
-  console.log("Product Details",productId)
 
   const { data: products  = [] , isLoading , error } = useQuery({
     queryFn: () => fetchData("products") ,

@@ -28,13 +28,11 @@ export const ProductContextProvider = ({ children }) => {
 
 
   const addProduct = (target, count) => {
-    console.log( "TArget in ADD: ",target )
     if (!target) {
       return;
     }
     setCart((prev) => {
       const existingProduct = prev.find((item) => item.id === target.id);
-      console.log("Exist:",existingProduct)
       if (existingProduct) {
         return prev.map((item) =>
           item.id === target.id ? { ...item, userQuantity: count } : item

@@ -5,7 +5,6 @@ import Loading from "./loading";
 
 const Bill = ( { product } ) => {
     const { productTotal } = useProduct();
-    console.log(product)
 
     if( !product ){
         return <Loading />
