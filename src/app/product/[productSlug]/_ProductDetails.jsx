@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '@/app/_store/store';
 import ProductsTabs from '@/app/_components/_products/ProductsTabs';
 
-const ProductDetails = ({ productId }) => {
+const ProductDetails = ({ productSlug }) => {
 
   const { data: products  = [] , isLoading , error } = useQuery({
     queryFn: () => fetchData("products") ,
@@ -14,7 +14,7 @@ const ProductDetails = ({ productId }) => {
   })
 
   // find the product whose details are to be set
-  const target = products.find(item => item.id == productId);
+  const target = products.find(item => item.slug == productSlug);
 
   // Load until the target is found
   if (!target) {

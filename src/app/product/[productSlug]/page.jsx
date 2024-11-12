@@ -22,8 +22,7 @@ export const metadata = {
 
 
 export default async function ProductPage({ params }) {
-  // await the productId from the url.
-  const { productId } = await params;
+  const { productSlug } = await params;
 
   return (
     <section id="product" className='w-full h-full mb-16'>
@@ -31,7 +30,7 @@ export default async function ProductPage({ params }) {
       <div className="bg-white dark:bg-gray-800">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
-          <ProductDetails productId={productId} />
+          <ProductDetails productSlug={productSlug} />
         </div>
       </div>
     </section>

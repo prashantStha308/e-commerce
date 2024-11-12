@@ -6,7 +6,7 @@ const Tiles = ({ product }) => {
 
   
   return (
-    <Link href={`/product/${product.id}`}>
+    <Link href={`/product/${product.slug}`}>
       <div className="tile cursor-pointer">
         <Image
           className="border border-yellow-700 mb-1 border-solid w-full h-48 object-cover hover:border-yellow-500 p-3"

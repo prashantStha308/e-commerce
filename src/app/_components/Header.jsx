@@ -111,7 +111,7 @@ const Header = ( { currentPage } ) => {
                                         alt={ currentUser.username + "'s profile picture" }
                                         width={40}
                                         height={40}
-                                        className='rounded-full'
+                                        className='rounded-full p-1 border-2 border-gray-700'
                                     />
                                     :<UserCircleIcon width={40} height={40} />
                                     }
