@@ -5,6 +5,7 @@ import Image from 'next/image'
 const UserInfo = () => {
     const { currentUser } = useUser();
 
+
   return (
     <>
         {/* Main container */}
@@ -14,8 +15,8 @@ const UserInfo = () => {
           {/* Profile picture section */}
           <div className='flex flex-col items-center lg:items-start p-4 space-y-4'>
             <Image
-              src='https://secure.gravatar.com/avatar/07fabef11d4d8520be098fec279a64e5?s=96&d=mm&r=g'
-              alt='Profile Picture'
+              src={ currentUser.avatar_url }
+              alt={ currentUser.username + "'s profile picture" }
               width={250}
               height={250}
               className='rounded-full'

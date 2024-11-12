@@ -63,7 +63,16 @@ const Header = ( { currentPage } ) => {
 
                                 <button onClick={redirect} className="bg-transparent">
                                     <div className="mr-2">
-                                        <UserCircleIcon width={40} height={40} />
+                                        { isLogged?
+                                             <Image
+                                             src={ currentUser.avatar_url }
+                                             alt={ currentUser.username + "'s profile picture" }
+                                             width={40}
+                                             height={40}
+                                             className='rounded-full'
+                                            />
+                                            :<UserCircleIcon width={40} height={40} />
+                                        }
                                     </div>
                                 </button>
                             </div>
@@ -96,7 +105,16 @@ const Header = ( { currentPage } ) => {
                         <li>
                             <button onClick={redirect} className="bg-transparent">
                                 <div className="flex justify-center align-middle text-gray-900 dark:text-gray-200">
-                                    <UserCircleIcon width={40} height={40} />
+                                    { isLogged?
+                                        <Image
+                                        src={ currentUser.avatar_url }
+                                        alt={ currentUser.username + "'s profile picture" }
+                                        width={40}
+                                        height={40}
+                                        className='rounded-full'
+                                    />
+                                    :<UserCircleIcon width={40} height={40} />
+                                    }
                                 </div>
                             </button>
                         </li>
