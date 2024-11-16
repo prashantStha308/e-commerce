@@ -1,6 +1,7 @@
 import Header from "@/app/_components/Header";
 import CatSubNav from "@/app/_components/CatSubNav";
 import Categories from "@/app/category/Categories";
+import BreadCrumb from "../_components/BreadCrumb";
 
 // metaData of this page
 export const metadata = {
@@ -28,7 +29,8 @@ export default function CategoryAll() {
       <section id="category">
         <Header currentPage="category" />
         <CatSubNav currentPage="all" />
-        <div className="bg-white dark:bg-black">
+        <BreadCrumb />
+        <div className="bg-white dark:bg-gray-900">
           <Categories />
         </div>
       </section>

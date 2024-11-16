@@ -2,6 +2,7 @@
 
 import Header from '@/app/_components/Header';
 import ProductDetails from './_ProductDetails';
+import BreadCrumb from '@/app/_components/BreadCrumb';
 
 export const metadata = {
   title: "NovaNest | Product",
@@ -28,6 +29,7 @@ export default async function ProductPage({ params }) {
     <section id="product" className='w-full h-full mb-16'>
       <Header currentPage={'product'} />
       <div className="bg-white dark:bg-gray-800">
+        <BreadCrumb />
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
           <ProductDetails productSlug={productSlug} />

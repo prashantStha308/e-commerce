@@ -38,3 +38,7 @@ body {
   @apply flex justify-center items-center h-40 w-40 bg-black/5 dark:bg-white/5 backdrop-blur-sm fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md z-50;
 
 }
+
+.breadCrumb-list{
+  @apply ms-1 text-2xl font-medium text-gray-500 md:ms-2 dark:text-gray-400 hover:text-blue-500 dark:hover:text-white;
+}

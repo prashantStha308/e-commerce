@@ -2,6 +2,7 @@ import Head from "next/head";
 import Header from "../../_components/Header";
 import CatSubNav from "../../_components/CatSubNav";
 import Categories from "../Categories";
+import BreadCrumb from "@/app/_components/BreadCrumb";
 
 // metaData of this page
 export const metadata = {
@@ -38,8 +39,9 @@ export default async function Category({ params }) {
       <section id="category">
         <Header currentPage="category" />
         <CatSubNav currentPage={catName} />
+        <BreadCrumb />
 
-        <div className="bg-white dark:bg-black">
+        <div className="bg-white dark:bg-gray-900">
           <Categories targetCat={catName} />
         </div>
       </section>
