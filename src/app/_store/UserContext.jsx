@@ -16,7 +16,42 @@ const UserContext = createContext();
 export const UserContextProvider =  ({ children }) => {
 
     const [ isLogged , setIsLogged ] = useState(false);
-    const [ currentUser , setCurrentUser ] = useState({});
+
+    // Initialing user state with initial user Object
+    const [ currentUser , setCurrentUser ] = useState({
+      first_name: "",
+      last_name: "",
+      username: "",
+      email: "",
+      billing: {
+          phone: 0,
+          country: "",
+          city: "",
+          email: "",
+          state: "",
+          first_name: "",
+          last_name: "",
+          company: "",
+          postcode: "",
+          address_1: "",
+          address_2: "",
+      },
+      shipping:{
+          phone: 0,
+          country: "",
+          city: "",
+          email: "",
+          state: "",
+          first_name: "",
+          last_name: "",
+          company: "",
+          postcode: 0,
+          address_1: "",
+          address_2: "",
+      },
+      is_paying_customer: "",
+      avatar_url: "https://secure.gravatar.com/avatar/52168962f3d5dfc43a30c789f8fc03ef?s=96&d=mm&r=g",
+  });
 
     // createUser function
   const createUser = async ( userData )=>{
@@ -92,6 +127,55 @@ export const UserContextProvider =  ({ children }) => {
     return { status: status , data: data , message: message };
   }
 
+  // Log Out
+  const signOut = ()=>{
+    if(!isLogged){
+      return { status: 'failed' , message: 'No logins detected' }
+    }
+
+    setCurrentUser({
+      first_name: "",
+      last_name: "",
+      username: "",
+      email: "",
+      billing: {
+          phone: 0,
+          country: "",
+          city: "",
+          email: "",
+          state: "",
+          first_name: "",
+          last_name: "",
+          company: "",
+          postcode: "",
+          address_1: "",
+          address_2: "",
+      },
+      shipping:{
+          phone: 0,
+          country: "",
+          city: "",
+          email: "",
+          state: "",
+          first_name: "",
+          last_name: "",
+          company: "",
+          postcode: 0,
+          address_1: "",
+          address_2: "",
+      },
+      is_paying_customer: "",
+      avatar_url: "https://secure.gravatar.com/avatar/52168962f3d5dfc43a30c789f8fc03ef?s=96&d=mm&r=g",
+  });
+
+
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("isLogged");
+    setIsLogged(false)
+
+    return { status: 'success' , message: 'Logged Out Successfully' }
+  }
+
   // Sign Up
   const signUp = async ( userData )  =>{
     const { status ,  status_code , message } = await createUser(userData);
@@ -128,7 +212,6 @@ export const UserContextProvider =  ({ children }) => {
       return error.response?.data
     }
   }
-  
 
   return(
     <UserContext.Provider value={{
@@ -138,6 +221,7 @@ export const UserContextProvider =  ({ children }) => {
         getUserById,
         isLogged,
         currentUser,
+        signOut,
     }}>
         {children}
     </UserContext.Provider>

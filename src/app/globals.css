@@ -40,5 +40,5 @@ body {
 }
 
 .breadCrumb-list{
-  @apply ms-1 text-2xl font-medium text-gray-500 md:ms-2 dark:text-gray-400 hover:text-blue-500 dark:hover:text-white;
+  @apply ms-1 text-lg sm:text-xl font-medium text-gray-500 md:ms-2 dark:text-gray-400 hover:text-blue-500 dark:hover:text-white;
 }
