@@ -3,7 +3,7 @@ const Footer = () => {
     const headerStyle = "text-purple-600 font-medium text-sm mb-6";
 
     return (
-      <footer className="tracking-wide bg-white dark:bg-gray-950 pt-12 pb-4 px-10">
+      <footer className="tracking-wide bg-white dark:bg-gray-950 pt-12 py-4 px-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-screen-xl mx-auto">
           <div>
             <h4 className={headerStyle}>Quick Links</h4>

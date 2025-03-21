@@ -2,9 +2,25 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  @apply bg-[#fffcfa] dark:bg-gray-800 text-black dark:text-white ;
+  @apply bg-[#fffcfa] dark:bg-gray-800 text-black dark:text-white overflow-x-hidden ;
 }
 
 .hoverText:hover{
-  @apply text-purple-800 transition-all duration-150 ease-out
+  @apply text-purple-600 dark:text-purple-400 transition-all duration-150 ease-out
+}
+
+button{
+  @apply cursor-pointer;
+}
+
+.signup-form-inputs{
+  @apply text-gray-800 dark:text-gray-200 mb-2 block text-xl;
+}
+
+.signup-loader{
+  @apply flex justify-center items-center h-40 w-40 bg-black/5 dark:bg-white/5 backdrop-blur-sm fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md z-50;
+}
+.signin-loader{
+  @apply flex justify-center items-center h-40 w-40 bg-black/5 dark:bg-white/5 backdrop-blur-sm fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md z-50;
+
 }

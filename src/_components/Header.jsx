@@ -1,9 +1,14 @@
+"use client"
+import useUserStore from "@/_store/UserStore";
+import Image from "next/image";
 import Link from "next/link";
+import { FaRegUser } from "react-icons/fa";
 
 export default function Header(){
+    const { user , isLogged } = useUserStore();
 
     return(
-        <header id="header" className=" px-4 py-2" >
+        <header id="header" className=" px-4 py-2 overflow-x-hidden" >
             <div className="flex justify-between gap-4 border-b border-b-purple-400 p-4" >
                 <Link href={"/"}>
                     <section id="company-name" className="flex items-center gap-4" >
@@ -13,9 +18,9 @@ export default function Header(){
                 </Link>
                 
                 {/* for medium to larger devices */}
-                <nav className="hidden md:flex items-center gap-4">
+                <nav className="hidden md:flex items-center gap-8">
                     <ul className="flex items-center gap-4 text-lg md:text-xl">
-                        <Link href={"#home"}>
+                        <Link href={"/"}>
                             <li className="hoverText">
                                 Home
                             </li>
@@ -26,11 +31,23 @@ export default function Header(){
                             </li>
                         </Link>
                     </ul>
-                    <div id="user-profile" className="border border-purple-400 p-1 rounded-full" >
-                        <Link href={"#profile"}>
-                            <div className="w-5 h-5 bg-purple-300 rounded-full" ></div>
-                        </Link>
-                    </div>
+                    <Link href={isLogged ? `/profile/${user.id}` : "/signin"} >
+                        <div id="user-profile" className="border border-purple-400 p-1 rounded-full cursor-pointer" >
+                                {
+                                    isLogged ? 
+                                        <Image
+                                            src={user.avatar_url}
+                                            alt={ user?.username + "'s profile picture" }
+                                            width={40}
+                                            height={40}
+                                            className='rounded-full'
+                                        />
+                                    :
+                                        // <div className="w-10 h-10 bg-purple-300 rounded-full" ></div>
+                                        <div className="rounded-full p-1"> <FaRegUser size={25} /> </div>
+                                }
+                        </div>
+                    </Link>
                 </nav>
 
                 {/* for smaller devices */}
