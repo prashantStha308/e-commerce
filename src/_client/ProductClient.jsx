@@ -2,14 +2,15 @@
 
 import AddToCart from '@/_components/AddToCart';
 import Loading from '@/_components/loading';
-import { fetchData } from '@/_store/ProductStore';
+import { fetchDataBySlug } from '@/_store/DataStore';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-const ProductClient = ({ pid }) => {
+const ProductClient = ({ slug }) => {
+  
   const { data, isPending, isError, error } = useQuery({
-    queryKey: [`Product: ${pid}`],
-    queryFn: () => fetchData(`products/${pid}`),
+    queryKey: [`Product: ${slug}`],
+    queryFn: () => fetchDataBySlug( "products" , slug ),
   });
 
   if (isPending) {
@@ -29,7 +30,7 @@ const ProductClient = ({ pid }) => {
   }
 
   return (
-    <div className='h-full'>
+    <div className='h-full py-24 '>
       <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
         {/* Product Image */}
         <div className="w-full">

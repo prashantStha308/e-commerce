@@ -25,7 +25,9 @@ export default function RootLayout({ children }) {
         <QueryStore>
           <main className="min-h-screen w-screen grid content-between" >
             <Header />
-              {children}
+              <div className="mb-48">
+                {children}
+              </div>
             <Footer />
           </main>
           <ReactQueryDevtools initialIsOpen={false} />

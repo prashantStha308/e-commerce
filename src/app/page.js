@@ -1,11 +1,11 @@
 "use client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchData } from "@/_store/ProductStore";
 import Tile from "@/_components/Tile";
 import Banner from "@/_components/Banner";
 import Loading from "@/_components/loading";
 import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { fetchData } from "@/_store/DataStore";
 
 export default function Home() {
 

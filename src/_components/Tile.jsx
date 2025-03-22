@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Tiles = ({ item }) => {
   
   return (
-    <Link href={`/product/${item.id}`}>
+    <Link href={`/product/${item.slug}`}>
       <div className="cursor-pointer m-2 group ">
         <Image
           className="border border-purple-500 mb-1 border-solid rounded-sm w-full h-48 object-cover hover:border-purple-800 p-3 transition-all duration-100 ease-in-out"

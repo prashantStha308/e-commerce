@@ -9,19 +9,6 @@ const KEY = process.env.NEXT_PUBLIC_KEY;
 const SECRET = process.env.NEXT_PUBLIC_SECRETS;
 const apiURL = process.env.NEXT_PUBLIC_URL;
 
-
-export const fetchData = async (req) => {
-    try {
-        const res = await axios.get(`${apiURL}wc/v3/${req}`, {
-            params: { consumer_key: KEY, consumer_secret: SECRET }
-        });
-        return res.data;
-    } catch (error) {
-        console.error(error.response?.message || error.message || "Unexpected error occurred");
-        return [];
-    }
-};
-
 const ProductStore = create(persist(
     (set) =>({
         cart:[],

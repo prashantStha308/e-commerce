@@ -8,8 +8,8 @@ export default function Header(){
     const { user , isLogged } = useUserStore();
 
     return(
-        <header id="header" className=" px-4 py-2 overflow-x-hidden" >
-            <div className="flex justify-between gap-4 border-b border-b-purple-400 p-4" >
+        <header id="header" className=" px-4 pt-2 overflow-x-hidden" >
+            <div className="flex justify-between gap-4 p-4" >
                 <Link href={"/"}>
                     <section id="company-name" className="flex items-center gap-4" >
                         <div className="w-14 h-14 bg-purple-400 rounded-full " ></div>
@@ -25,14 +25,14 @@ export default function Header(){
                                 Home
                             </li>
                         </Link>
-                        <Link href={"#category"}>
+                        <Link href={"/category/all"}>
                             <li className="hoverText">
                             Categories 
                             </li>
                         </Link>
                     </ul>
                     <Link href={isLogged ? `/profile/${user.id}` : "/signin"} >
-                        <div id="user-profile" className="border border-purple-400 p-1 rounded-full cursor-pointer" >
+                        <div id="user-profile" className="border border-purple-400 dark:border-purple-700 hover:border-purple-700 dark:hover:border-purple-400 p-1 rounded-full cursor-pointer transition-all duration-100 ease-in-out " >
                                 {
                                     isLogged ? 
                                         <Image

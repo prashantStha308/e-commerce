@@ -3,10 +3,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import { FaPlus , FaMinus } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import { useProductStore } from '@/_store/ProductStore';
+import Modal from './Modal';
+import useUserStore from '@/_store/UserStore';
 
 const AddToCart = ({ target = {} }) => {
     const { cart = [], addToCart , removeItem } = useProductStore();
-    const { isLogged } = useState(true);
+    const { isLogged } = useUserStore();
     const router = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +54,7 @@ const AddToCart = ({ target = {} }) => {
     const handleAddToCart = () => {
         if (isLogged) {
             if (count > 0) {
-                addProduct(target, count);
+                addToCart(target, count);
                 handelAddToBag();
             }
         } else {
