@@ -2,7 +2,7 @@ import SignUpClient from "@/_client/SignUpClient"
 
 export const metadata = {
     title: "The Next Shop - Sign Up",
-    description: "Explore game cards on The Next Shop",
+    description: "Sign up to explore game cards and buy them on The Next Shop",
     openGraph: {
         title: "The Next Shop - Sign In",
         description: "Explore game cards on The Next Shop",

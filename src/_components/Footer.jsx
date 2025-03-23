@@ -1,6 +1,6 @@
 const Footer = () => {
-    const linkStyle= "hover:text-purple-600 text-gray-800 text-sm font-normal transition-all";
-    const headerStyle = "text-purple-600 font-medium text-sm mb-6";
+    const linkStyle= "hover:text-purple-600 text-gray-800 dark:text-gray-400 text-sm font-normal transition-all";
+    const headerStyle = "text-purple-600 dark:text-purple-400 font-medium text-lg mb-6";
 
     return (
       <footer className="tracking-wide bg-white dark:bg-gray-950 pt-12 py-4 px-5">
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
   
         <div className="border-t text-center border-[#6b5f5f] pt-4 mt-8">
-          <p className="text-gray-400 text-sm">© The Next Store.</p>
+          <p className="text-gray-800 text-sm">© The Next Store.</p>
         </div>
       </footer>
     );

@@ -17,6 +17,10 @@ button{
   @apply text-gray-800 dark:text-gray-200 mb-2 block text-xl;
 }
 
+.signin-input{
+  @apply bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md  outline-blue-500 transition-all;
+}
+
 .signup-loader{
   @apply flex justify-center items-center h-40 w-40 bg-black/5 dark:bg-white/5 backdrop-blur-sm fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md z-50;
 }

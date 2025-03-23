@@ -60,8 +60,11 @@ const UserStore = create(
       setIsLogged: (isLogged) => set({ isLogged }),
 
         createUser: async (userData) => {
+            console.log(`${apiURL}wc/v3/customers?consumer_key=${KEY}&consumer_secret=${SECRET}`)
+            console.log( "Inside Create User: ",userData);
+            console.log( "Inside Create User(JSON): ",JSON.stringify(userData));
             try {
-                if (!userData.title || !userData.address) {
+                if (!userData.email || !userData.first_name || !userData.last_name || !userData.username ) {
                     throw new Error("Required Fields not filled");
                 }
                 const res = await axios.post(
@@ -78,10 +81,7 @@ const UserStore = create(
                     throw new Error(res.code);
                 }
 
-                console.log(res.status); // Debugging
-
                 set({ user: userData });
-
                 return {
                     status: "success",
                     message: res.status || "User Created Successfully",

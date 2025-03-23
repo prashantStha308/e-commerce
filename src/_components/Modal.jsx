@@ -1,3 +1,4 @@
+"use client"
 import { useRouter } from "next/navigation";
 
 export default function Modal({ onClose ,  title , message , login=false }) {
@@ -6,11 +7,12 @@ export default function Modal({ onClose ,  title , message , login=false }) {
 
   const handelRedirect = ()=>{
     router.push('/signin');
+    onClose();
   }
 
   return (
     <>
-      <div id="default-modal" tabIndex="-1" className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden h-full bg-black bg-opacity-40" >
+      <div id="default-modal" tabIndex="-1" className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden h-full bg-black/45 backdrop-blur-xl" >
           <div className="relative p-4 w-full max-w-2xl max-h-full">
 
               {/* Modal Content */}

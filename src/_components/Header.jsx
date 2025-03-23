@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { BaggageClaim } from "lucide-react";
 import Modal from "./Modal";
 
 export default function Header(){
@@ -68,7 +68,7 @@ export default function Header(){
                             <li onClick={handleCheckout} >
                                 <span className="sr-only"> Checkout </span>
                                 <button className="hoverText" >
-                                    <MdOutlineShoppingCartCheckout size={30} className="hoverText" />
+                                    <BaggageClaim size={30} className="hoverText" />
                                 </button>
                             </li>
 
