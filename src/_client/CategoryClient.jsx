@@ -1,12 +1,13 @@
 "use client"
 import Loading from "@/_components/loading"
 import Tiles from "@/_components/Tile"
-import { fetchProductByCategory } from "@/_store/DataStore"
+import { fetchData, fetchProductByCategory } from "@/_store/DataStore"
 import { useQuery } from "@tanstack/react-query"
+import Link from "next/link"
 
 const CategoryClient = ({ targetCat }) => {
   const { data : product , isPending , isError } = useQuery({
-    queryFn: ()=> fetchProductByCategory( targetCat ),
+    queryFn: ()=> targetCat !== "trending" ? fetchProductByCategory( targetCat ) : fetchData("products") ,
     queryKey: [`${targetCat} - CategoryItem`]
   })
 
@@ -29,9 +30,21 @@ const CategoryClient = ({ targetCat }) => {
         ?
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-4">
             {
-              product.map( (item , index) =>{
-                return <Tiles item={item} key={index} />
-              } )
+              targetCat !== "trending"
+              ?
+                product.map( (item , index) =>{
+                  return (
+                    <Link key={index} href={`/category/${targetCat}/${item.slug}`}>
+                      <Tiles item={item} />
+                    </Link>
+                  )
+                } )
+              :
+                product.sort((a, b) => b.total_sales - a.total_sales).slice(0,5).map( (item , index) => (
+                  <Link key={index} href={`/category/${targetCat}/${item.slug}`} >
+                    <Tiles item={item} />
+                  </Link>
+                ) )
             }
           </div>
         :

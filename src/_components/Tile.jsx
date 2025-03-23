@@ -1,14 +1,13 @@
 "use client"
 import Image from 'next/image';
-import Link from 'next/link';
 
 const Tiles = ({ item }) => {
   
   return (
-    <Link href={`/product/${item.slug}`}>
+    // <Link href={`/product/${item.slug}`}>
       <div className="cursor-pointer m-2 group ">
         <Image
-          className="border border-purple-500 mb-1 border-solid rounded-sm w-full h-48 object-cover hover:border-purple-800 p-3 transition-all duration-100 ease-in-out"
+          className="border border-purple-500 mb-1 border-solid rounded-sm w-full h-48 object-cover hover:border-purple-800 p-3 transition-all duration-100 ease-in-out active:border-purple-700"
           alt={item.name}
           src={item.images[0]?.src}
           loading="lazy"
@@ -22,10 +21,7 @@ const Tiles = ({ item }) => {
             {
               item.sale_price > 0 ? (
                 <div>
-                  <s className='opacity-60'>
-                    <span className='text-gray-900 dark:text-gray-50  text-base'>NRP. {item.regular_price}</span>
-                  </s>
-                  <span className='text-gray-900 dark:text-gray-50  text-xl ml-2'>NRP. {item.sale_price}</span>
+                  <span className='text-gray-900 dark:text-gray-50 text-left text-xl'>NRP. <span className='line-through text-lg opacity-55' >{item.regular_price}</span> {item.sale_price}</span>
                 </div>
               ) : (
                 <span className='text-gray-900 dark:text-gray-50  text-base'>NRP. {item.regular_price}</span>
@@ -41,7 +37,7 @@ const Tiles = ({ item }) => {
         </div>
 
       </div>
-    </Link>
+    // </Link>
   );
 };
 

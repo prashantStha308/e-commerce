@@ -36,13 +36,14 @@ const ProductStore = create(persist(
 
             if( targetIndex >= 0 && updatedCart[targetIndex].amount <= 0 ){
                 const state = ProductStore.getState();
-                console.log("calling removeIem from addToCart function");
+                console.log("calling removeIem from addToCart function:", state.cart[0]);
                 state.removeItem( updatedCart[targetIndex].id );
             }
 
         },
         removeItem: (targetId) =>{
-            console.log("Inside removeItem with id: " , targetId);
+            const state = ProductStore.getState();
+            console.log("calling removeItem:", state.cart[0]);
             set(state => ({ cart: state.cart.filter(item => item.id !== targetId) }));
         },
     
@@ -50,7 +51,25 @@ const ProductStore = create(persist(
             const state = ProductStore.getState();
             const targetCart = state.cart.find( item => item.id === pid );
             return targetCart ? targetCart.amount : 0 ;
-        }
+        },
+
+        getProductTotalCost: (pid) => {
+            const { cart } = ProductStore.getState();
+            const targetCart = cart.find(item => item.id === pid);
+            if (targetCart) {
+                const price = parseFloat(targetCart.price);
+                return targetCart.amount * price;
+            }
+            return 0;
+        },
+        
+        getTotalCost: () => {
+            const { cart } = ProductStore.getState();
+            return cart.reduce((total, item) => {
+                const price = parseFloat(item.price);
+                return total + (item.amount * price);
+            }, 0);
+        },
     })
 ),
     {

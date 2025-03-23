@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
         <QueryStore>
           <main className="min-h-screen w-screen grid content-between" >
             <Header />
-              <div className="mb-48">
+              <div className=" pb-48">
                 {children}
               </div>
             <Footer />

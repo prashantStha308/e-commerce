@@ -57,7 +57,7 @@ const Banner = ({ slides }) => {
                 {slide.name}
               </h1>
               {/* Button */}
-              <Link href={`/product/${slide.id}`}>
+              <Link href={`/product/${slide.slug}`}>
                 <button
                   ref={btnRef}
                   className="bg-black text-white rounded-md px-4 py-3 cursor-pointer"

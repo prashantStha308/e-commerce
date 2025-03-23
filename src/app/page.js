@@ -32,14 +32,18 @@ export default function Home() {
             
               <h1 className="text-2xl md:text-3xl lg:text-4xl flex gap-2 items-end" > Trending right now
                 <Link href={"/category/trending"}>
-                  <span className="flex items-center text-purple-400 text-sm md:text-lg lg:text-xl hover:underline"> See more..<MdKeyboardArrowRight /> </span>
+                  <span className="flex items-center text-purple-400 text-sm md:text-lg lg:text-xl hover:underline active:text-purple-700"> See more..<MdKeyboardArrowRight /> </span>
                 </Link>
               </h1>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-4">
             {
               products.slice(0,6).map( (item , index) =>{
-                return <Tile item={item} key={index} />
+                return(
+                  <Link key={index} href={`/product/${item.slug}`} >
+                    <Tile item={item} />
+                  </Link>
+                )
               } )
             }
           </div>

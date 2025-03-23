@@ -1,56 +1,63 @@
 import CategoryClient from "@/_client/CategoryClient";
+import BreadCrumb from "@/_components/Breadcrumb";
 import CatNavbar from "@/_components/CatNavbar";
 import { fetchDataBySlug } from "@/_store/DataStore";
 import { notFound } from "next/navigation";
 
 
 export async function generateMetadata({ params }) {
-  let { slug } = await params;
+  let { slug } = params;
+
   try {
-    if (slug.trim().length === 0) {
+    if (!slug || slug.trim().length === 0) {
       slug = 'all';
     }
 
-    const category = slug !== 'all' && await fetchDataBySlug('products/categories', slug);
+    const isCategory = slug !== 'all' && slug !== 'trending';
+    const category = isCategory ? await fetchDataBySlug('products/categories', slug) : null;
+
+    const title = isCategory
+      ? `${category?.name || 'Category'} - Card Store`
+      : slug === "trending"
+      ? "Trending Items - Card Store"
+      : "Browse Categories";
+
+    const description = isCategory
+      ? category?.description || `Explore products in the ${category?.name} category.`
+      : slug === 'all'
+      ? "Browse all categories and find the perfect product for you."
+      : "Discover trending items available now.";
+
+    const image = category?.image || 'default-image-url'; // Fallback image
+    const url = isCategory ? category?.permalink || 'fallback-url' : 'your-default-url';
 
     return {
-      title: slug !== 'all'
-        ? `${category.name} - Card Store`
-        : 'Browse Categories',
-      description: slug !== 'all'
-        ? `Explore products in the ${category.name} category.` || category.description
-        : 'Browse the categories available on Card Store.',
+      title,
+      description,
       openGraph: {
-        title: slug !== 'all'
-          ? `${category.name} - Card Store`
-          : 'Browse Categories',
-        description: slug !== 'all'
-          ? `Explore products in the ${category.name} category.` || category.description
-          : 'Browse the categories available on Card Store.',
-        url: slug !== 'all' ? category.permalink : 'your-default-url', // replace with the actual URL
-        siteName: 'Card Store',
-        images: category.image ? category.image : '', // provide a fallback if no image
-        type: 'website',
+        title,
+        description,
+        url,
+        siteName: "Card Store",
+        images: image,
+        type: "website",
       },
       twitter: {
-        card: 'summary_large_image',
-        title: slug !== 'all'
-          ? `${category.name} - Card Store`
-          : 'Browse Categories',
-        description: slug !== 'all'
-          ? `Explore products in the ${category.name} category.` || category.description
-          : 'Browse the categories available on Card Store.',
-        images: category.image ? category.image : '',
+        card: "summary_large_image",
+        title,
+        description,
+        images: image,
       },
       alternates: {
-        canonical: slug !== 'all' ? "put another link here": 'your-default-url', // replace with the actual URL
+        canonical: isCategory ? url : 'your-default-url',
       },
     };
   } catch (error) {
-    console.error(error);
+    console.error("Metadata generation error:", error);
     notFound();
   }
 }
+
 
 const page = async({ params }) => {
   let { slug } = await params;
@@ -59,8 +66,9 @@ const page = async({ params }) => {
   }
 
   return (
-    <section id="category" className="min-h-full max-w-full grid content-between gap-20">
+    <section id="category" className="min-h-full max-w-full grid content-between">
       <CatNavbar currentPage={slug} />
+      <BreadCrumb />
       <CategoryClient targetCat={slug} />
     </section>
     

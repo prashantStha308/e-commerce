@@ -1,6 +1,8 @@
+import CheckoutClient from "@/_client/CheckoutClient"
+
 const page = () => {
   return (
-    <div> Checkout Page </div>
+    <CheckoutClient />
   )
 }
 

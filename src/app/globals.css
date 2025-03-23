@@ -2,7 +2,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  @apply bg-[#fffcfa] dark:bg-gray-800 text-black dark:text-white overflow-x-hidden ;
+  @apply bg-[#fffcfa] dark:bg-gray-900 text-black dark:text-white overflow-x-hidden ;
 }
 
 .hoverText:hover{
@@ -23,4 +23,19 @@ button{
 .signin-loader{
   @apply flex justify-center items-center h-40 w-40 bg-black/5 dark:bg-white/5 backdrop-blur-sm fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md z-50;
 
+}
+
+#userDetail>input{
+  @apply hover:bg-purple-200
+}
+
+.userDetail-input{
+  @apply block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 outline-none hover:bg-purple-100/75 dark:hover:bg-purple-300/15;
+}
+
+.userDetail-phone-input{
+  @apply z-20 block w-full rounded-e-lg border border-s-0 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900  dark:border-gray-600 dark:border-s-gray-700  dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 hover:bg-purple-100/75 dark:hover:bg-purple-300/15;
+}
+.userDetail-add-btn{
+  @apply flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
 }

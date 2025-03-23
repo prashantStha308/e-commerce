@@ -1,17 +1,15 @@
-// Product Page
-
 import ProductClient from '@/_client/ProductClient';
 import BreadCrumb from '@/_components/Breadcrumb';
 import { fetchDataBySlug } from '@/_store/DataStore';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {  
-    const { slug } = await params; 
-    if ( slug.trim().length === 0 ) {
+    const { productSlug } = await params;
+    if ( productSlug.trim().length === 0 ) {
         throw new Error("Invalid product");
     }
     try {
-      const product = await fetchDataBySlug( "products" , slug ); 
+      const product = await fetchDataBySlug( "products" , productSlug ); 
 
       return {
         title: `${product.name} - Card Store`,
@@ -49,16 +47,17 @@ export async function generateMetadata({ params }) {
 
 
 export default async function ProductPage({ params }) {
-    const { slug } = await params; 
+    const { productSlug } = await params;
+    console.log( "Product Slug: ",productSlug );
 
-    if ( slug.trim().length === 0 ) {
+    if ( productSlug.trim().length === 0 ) {
         notFound();
     }
 
-    return (
-      <section>
-          <BreadCrumb />
-          <ProductClient slug={slug} />
+    return(
+      <section className='grid' >
+        <BreadCrumb />
+        <ProductClient slug={productSlug} />
       </section>
     );
 }
