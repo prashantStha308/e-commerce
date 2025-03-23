@@ -1,40 +1,48 @@
 "use client";
 import React, { useEffect, useState, useRef } from 'react';
-import { FaPlus , FaMinus } from "react-icons/fa";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import { useProductStore } from '@/_store/ProductStore';
 import Modal from './Modal';
 import useUserStore from '@/_store/UserStore';
 
 const AddToCart = ({ target = {} }) => {
-    const { cart = [], addToCart , removeItem } = useProductStore();
+    const { cart = [], addToCart, removeItem } = useProductStore();
     const { isLogged } = useUserStore();
     const router = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
     const [count, setCount] = useState(0);
     const [addToBag, setAddToBag] = useState("Add To Cart");
-    const [targetCart, setTargetCart] = useState([]);
+    const [targetCart, setTargetCart] = useState(null); // Changed to track target cart item
     const intervalId = useRef(null);
+    const [removeCartItem, setRemoveCartItem] = useState(false);
 
     useEffect(() => {
         const foundCart = cart.find(item => item.id === target.id);
         setTargetCart(foundCart);
-    }, [cart, target]);
+        if (foundCart?.amount) {
+            setCount(foundCart.amount);
+        }
+    }, [cart, target.id]);
 
     useEffect(() => {
-        if (targetCart?.amount) {
-            setCount(targetCart.amount);
+        if (removeCartItem && targetCart) {
+            removeItem(targetCart.id);
+            setRemoveCartItem(false);
         }
-    }, [targetCart]);
+    }, [removeCartItem, targetCart, removeItem]);
 
     const handleCountInr = () => setCount(prev => prev + 1);
 
     const handleCountDcr = () => {
-        setCount(prev => Math.max(0, prev - 1));
-        if (count === 1) {
-            removeItem(target.id);
-        }
+        setCount(prev => {
+            const newCount = Math.max(prev - 1, 0);
+            if (newCount === 0 && targetCart) {
+                setRemoveCartItem(true);
+            }
+            return newCount;
+        });
     };
 
     const handelAddToBag = () => {
@@ -62,26 +70,26 @@ const AddToCart = ({ target = {} }) => {
         }
     };
 
-    const handelCheckout= ()=>{
-        if(isLogged){
-            setIsOpen(false)
-            router.push('/checkout')
-        }else{
-            setIsOpen(true)
+    const handelCheckout = () => {
+        if (isLogged) {
+            setIsOpen(false);
+            router.push('/checkout');
+        } else {
+            setIsOpen(true);
         }
-    }
+    };
 
     const handelModalClose = () => setIsOpen(false);
 
     return (
         <>
-            {(isOpen) && (
+            {isOpen && (
                 <Modal onClose={handelModalClose} title="Not Logged in" message="Please Log in to add the product to your cart and checkout" login={true} />
             )}
             <div className="flex items-center gap-4">
                 <button
                     type="button"
-                    className="rounded-sm bg-indigo-600 text-white hover:bg-indigo-800 transition-all text-2xl p-4 "
+                    className="rounded-sm bg-indigo-600 text-white hover:bg-indigo-800 transition-all text-2xl p-4"
                     onClick={handleCountDcr}
                 >
                     <FaMinus size={15} />
@@ -91,7 +99,7 @@ const AddToCart = ({ target = {} }) => {
 
                 <button
                     type="button"
-                    className="rounded-sm bg-indigo-600 text-white hover:bg-indigo-800 transition-all text-2xl p-4 "
+                    className="rounded-sm bg-indigo-600 text-white hover:bg-indigo-800 transition-all text-2xl p-4"
                     onClick={handleCountInr}
                 >
                     <FaPlus size={15} />
@@ -109,7 +117,8 @@ const AddToCart = ({ target = {} }) => {
 
                 <button
                     type="button"
-                    className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white hover:bg-indigo-700" onClick={handelCheckout}
+                    className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white hover:bg-indigo-700"
+                    onClick={handelCheckout}
                 >
                     Checkout
                 </button>

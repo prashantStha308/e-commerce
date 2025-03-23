@@ -15,24 +15,35 @@ const ProductStore = create(persist(
         setCart: ( cart ) => set({cart}),
     
         addToCart: ( product , count )=>{
+
+            let targetIndex;
+            let updatedCart;
+
             set(state => {
-                const existingItemIndex = state.cart.findIndex(item => item.id === product.id);
-                
-                if (existingItemIndex >= 0) {
-                    // Item exists in the cart, update its amount
-                    const updatedCart = [...state.cart];
-                    updatedCart[existingItemIndex].amount = count;
-                    localStorage.setItem( 'cart' , updatedCart );
+                targetIndex = state.cart.findIndex(item => item.id === product.id);
+            
+                if (targetIndex >= 0) {
+                    // update existing cart item
+                    updatedCart = [...state.cart];
+                    updatedCart[targetIndex].amount = count;
                     return { cart: updatedCart };
                 } else {
-                    const updatedCart = [...state.cart, { ...product, amount: count }];
-                    localStorage.setItem( 'cart' , JSON.stringify(updatedCart) );
-                    return { cart: [...state.cart, updatedCart] };
+                    // add cart item
+                    updatedCart = [...state.cart, { ...product, amount: count }];
+                    return { cart: updatedCart }; 
                 }
             });
+
+            if( targetIndex >= 0 && updatedCart[targetIndex].amount <= 0 ){
+                const state = ProductStore.getState();
+                console.log("calling removeIem from addToCart function");
+                state.removeItem( updatedCart[targetIndex].id );
+            }
+
         },
-        removeItem: () =>{
-            console.log("bla bla")
+        removeItem: (targetId) =>{
+            console.log("Inside removeItem with id: " , targetId);
+            set(state => ({ cart: state.cart.filter(item => item.id !== targetId) }));
         },
     
         getCartItem: ( pid )=>{

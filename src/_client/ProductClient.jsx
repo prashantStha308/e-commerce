@@ -22,9 +22,6 @@ const ProductClient = ({ slug }) => {
   }
 
   const targetProduct = data;
-
-
-  // If no product is found, show a "Product not found" message
   if (!targetProduct) {
     return <div>Product not found</div>;
   }
@@ -59,7 +56,7 @@ const ProductClient = ({ slug }) => {
 
           {/* Add to Cart */}
           <form className="mt-6">
-            <AddToCart product={targetProduct}  />
+            <AddToCart target={targetProduct}  />
           </form>
 
         </div>
