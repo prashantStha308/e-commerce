@@ -274,7 +274,7 @@ const SignUpClient = () => {
                 </div>
 
                 <div className="!mt-12">
-                  <input type="submit" value={"Sign Up"}className="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" />
+                  <input type="submit" value={"Sign Up"}className="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none cursor-pointer" />
                 </div>
             </form>
             {

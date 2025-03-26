@@ -60,7 +60,7 @@ const Banner = ({ slides }) => {
               <Link href={`/product/${slide.slug}`}>
                 <button
                   ref={btnRef}
-                  className="bg-black text-white rounded-md px-4 py-3 cursor-pointer"
+                  className="bg-black text-white rounded-md px-4 py-3 cursor-pointer hover:bg-purple-500 transition-all duration-150 ease-in-out"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >

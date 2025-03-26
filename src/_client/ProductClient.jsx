@@ -5,6 +5,9 @@ import Loading from '@/_components/loading';
 import { fetchDataBySlug } from '@/_store/DataStore';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Tab from "@/_components/Tab.jsx";
+import Recommendation from "@/_components/Recommendation.jsx"
+
 
 const ProductClient = ({ slug }) => {
   
@@ -27,8 +30,8 @@ const ProductClient = ({ slug }) => {
   }
 
   return (
-    <div className='h-full py-24 '>
-      <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+    <div className='h-full py-10 '>
+      <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-4">
         {/* Product Image */}
         <div className="w-full">
           <div key={targetProduct.id}>
@@ -50,8 +53,9 @@ const ProductClient = ({ slug }) => {
           </div>
 
           {/* Short Description */}
-          <div className="mt-6 space-y-6 text-base text-gray-900 dark:text-gray-300">
-            {targetProduct.short_description.replace('<p>','').replace('</p>', '') || "No description available"}
+          <div className=" text-base text-gray-900 dark:text-gray-300 py-4 grid gap-2">
+            <h2 className={"text-xl md:text-2xl lg:text-3xl font-bold text-left"} > Description </h2>
+            <p className={"text-left text-lg"} >{targetProduct.short_description.replace('<p>','').replace('</p>', '') || "No description available"}</p>
           </div>
 
           {/* Add to Cart */}
@@ -61,6 +65,8 @@ const ProductClient = ({ slug }) => {
 
         </div>
       </div>
+      <Tab target={targetProduct} />
+      <Recommendation product={ targetProduct } />
     </div>
   );
 };

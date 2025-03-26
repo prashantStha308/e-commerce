@@ -7,8 +7,10 @@ import { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { BaggageClaim } from "lucide-react";
 import Modal from "./Modal";
+import SearchBar from "./SearchBar";
 
 export default function Header(){
+
     const { user , isLogged } = useUserStore();
     const router = useRouter();
     const [ isModal , setIsModal ] = useState({
@@ -42,12 +44,12 @@ export default function Header(){
             {
                 isModal.state && <Modal title={isModal.title} message={isModal.message} onClose={closeModal} login={true} />
             }
-            <header id="header" className=" px-4 pt-2 overflow-x-hidden" >
+            <header id="header" className="  overflow-x-hidden px-4 py-2 mb-2 z-50" >
                 <div className="flex justify-between gap-4 p-4" >
                     <Link href={"/"}>
                         <section id="company-name" className="flex items-center gap-4" >
                             <div className="w-14 h-14 bg-purple-400 rounded-full " ></div>
-                            <h1 className="text-lg md:text-2xl font-bold" > The Next Store </h1>
+                            <h1 className="hidden md:block md:text-2xl font-bold" > The Next Store </h1>
                         </section>
                     </Link>
                     
@@ -104,5 +106,4 @@ export default function Header(){
             </header>
         </div>
     )
-
 }

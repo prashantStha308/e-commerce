@@ -1,6 +1,7 @@
 import CategoryClient from "@/_client/CategoryClient";
 import BreadCrumb from "@/_components/Breadcrumb";
 import CatNavbar from "@/_components/CatNavbar";
+import SearchBar from "@/_components/SearchBar";
 import { fetchDataBySlug } from "@/_store/DataStore";
 import { notFound } from "next/navigation";
 
@@ -69,6 +70,13 @@ const page = async({ params }) => {
     <section id="category" className="min-h-full max-w-full grid content-between">
       <CatNavbar currentPage={slug} />
       <BreadCrumb />
+      {/* <div className="flex justify-center p-4 ">
+        <div></div>
+        <div className="w-md">
+          <SearchBar />
+        </div>
+        <div></div>
+      </div> */}
       <CategoryClient targetCat={slug} />
     </section>
     

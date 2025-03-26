@@ -18,14 +18,16 @@ const Tiles = ({ item }) => {
 
         <div className='grid gap-2 '>
           <div>
-            {
-              item.sale_price > 0 ? (
-                <div>
+          {
+              item.sale_price === item.regular_price ?
+                (
+                    <span className='text-gray-900 dark:text-gray-50  text-base'>NRP. {item.regular_price}</span>
+                )
+              : (
+                <p>
                   <span className='text-gray-900 dark:text-gray-50 text-left text-xl'>NRP. <span className='line-through text-lg opacity-55' >{item.regular_price}</span> {item.sale_price}</span>
-                </div>
-              ) : (
-                <span className='text-gray-900 dark:text-gray-50  text-base'>NRP. {item.regular_price}</span>
-              )
+                </p>
+              ) 
             }
             {item.stock_status ? (
               <p className="text-green-500 italic font-medium">In Stock</p>

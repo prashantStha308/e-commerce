@@ -25,7 +25,7 @@ export default function Home() {
   // https://github.com/tomatoweb/e-shop-next/blob/starter/src/components/Slider.tsx
 
   return (
-    <section id="home" className="px-1 py-4 grid gap-4" >
+    <section id="home" className=" py-4 grid gap-4" >
         <Banner slides={bnrImg} />
         <div className="grid gap-2 px-2" >
           <div>
